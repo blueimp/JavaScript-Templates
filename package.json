@@ -1,0 +1,19 @@
+{
+    "name": "blueimp-tmpl",
+    "description": "< 1KB lightweight, fast & powerful JavaScript templating engine with zero dependencies. Compatible with server-side environments like node.js, module loaders like RequireJS and all web browsers.",
+    "homepage": "https://github.com/blueimp/JavaScript-Templates",
+    "author": {
+        "name": "Sebastian Tschan",
+        "url": "https://blueimp.net"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/blueimp/JavaScript-Templates.git"
+    },
+    "bugs": "https://github.com/blueimp/JavaScript-Templates/issues",
+    "scripts": {
+        "test": "node ./test/test.js"
+    },
+    "main": "tmpl",
+    "version": "1.0.0"
+}
