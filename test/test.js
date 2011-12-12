@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates Test 1.0
+ * JavaScript Templates Test 1.0.1
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -92,9 +92,9 @@
         );
     });
 
-    $.test('Allow HTML special characters with {%!o.prop%}', function () {
+    $.test('Allow HTML special characters with {%#o.prop%}', function () {
         $.strictEqual(
-            $.tmpl('{%!o.special%}', data),
+            $.tmpl('{%#o.special%}', data),
             '<>&"\x00'
         );
     });

@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates 1.0
+ * JavaScript Templates 1.0.1
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -22,9 +22,9 @@
                 tmpl(tmpl.load(str)) :
                     new Function(
                         tmpl.arg,
-                        "var _s=''" + tmpl.helper + ";_s+='" +
+                        ("var _s=''" + tmpl.helper + ";_s+='" +
                             str.replace(tmpl.regexp, tmpl.func) +
-                            "';return _s;"
+                            "';return _s;").split("_s+='';").join("")
                     );
         f.tmpl = f.tmpl || tmpl;
         return data ? f(data) : f;
@@ -33,7 +33,7 @@
     tmpl.load = function (id) {
         return document.getElementById(id).innerHTML;
     };
-    tmpl.regexp = /(\s+)|('|\\)(?![^%]*%\})|(?:\{%(=|!)(.+?)%\})|(\{%)|(%\})/g;
+    tmpl.regexp = /(\s+)|('|\\)(?![^%]*%\})|(?:\{%(=|#)(.+?)%\})|(\{%)|(%\})/g;
     tmpl.func = function (s, p1, p2, p3, p4, p5, p6, o, str) {
         if (p1) { // whitespace
             return o && o + s.length !== str.length ? " " : "";
@@ -41,7 +41,7 @@
         if (p2) { // single quote or backslash
             return "\\" + s;
         }
-        if (p3) { // interpolation: {%=prop%}, or unescaped: {%!prop%}
+        if (p3) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
             if (p3 === "=") {
                 return "'+_e(" + p4 + ")+'";
             }
