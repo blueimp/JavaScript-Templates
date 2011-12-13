@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates 1.0.1
+ * JavaScript Templates 1.0.2
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -45,7 +45,7 @@
             if (p3 === "=") {
                 return "'+_e(" + p4 + ")+'";
             }
-            return "'+" + p4 + "+'";
+            return "'+(" + p4 + "||'')+'";
         }
         if (p5) { // evaluation start tag: {%
             return "';";
@@ -63,7 +63,7 @@
         "\x00": ""
     };
     tmpl.encode = function (s) {
-        return String(s).replace(
+        return String(s || "").replace(
             tmpl.encReg,
             function (c) {
                 return tmpl.encMap[c];
@@ -72,7 +72,7 @@
     };
     tmpl.arg = "o";
     tmpl.helper = ",_t=arguments.callee.tmpl,_e=_t.encode" +
-        ",print=function(s,e){_s+=e&&s||_e(s);}" +
+        ",print=function(s,e){_s+=e&&(s||'')||_e(s);}" +
         ",include=function(s,d){_s+=_t(s,d);}";
     if (typeof define === "function" && define.amd) {
         // Register as an AMD module:

@@ -256,6 +256,14 @@ Use dot notation to print nested properties:
 <strong>{%=o.author.name%}</strong>
 ```
 
+Note that the JavaScript Templates engine prints **falsy** values as empty strings.  
+That is, **undefined**, **null**, **false**, **0** and **NaN** will all be converted to **''**.  
+To be able to print e.g. the number 0, convert it to a String before using it as an output variable:
+
+```html
+<h3>{%=0+''%}</h3>
+```
+
 ### Evaluation
 Use **print(str)** to add escaped content to the output:
 

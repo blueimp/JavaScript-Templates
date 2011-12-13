@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates Test 1.0.1
+ * JavaScript Templates Test 1.0.2
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -23,6 +23,9 @@
         },
         data = {
             value: 'value',
+            nullValue: null,
+            falseValue: false,
+            zeroValue: 0,
             special:  '<>&"\x00',
             list: [1, 2, 3, 4, 5],
             func: function () {
@@ -134,6 +137,32 @@
         );
     });
 
+    $.test('Print empty string for escaped falsy values', function () {
+        $.strictEqual(
+            $.tmpl(
+                '{%=o.undefinedValue%}{% print(o.undefinedValue); %}' +
+                    '{%=o.nullValue%}{% print(o.nullValue); %}' +
+                    '{%=o.falseValue%}{% print(o.falseValue); %}' +
+                    '{%=o.zeroValue%}{% print(o.zeroValue); %}',
+                data
+            ),
+            ''
+        );
+    });
+
+    $.test('Print empty string for unescaped falsy values', function () {
+        $.strictEqual(
+            $.tmpl(
+                '{%#o.undefinedValue%}{% print(o.undefinedValue, true); %}' +
+                    '{%#o.nullValue%}{% print(o.nullValue, true); %}' +
+                    '{%#o.falseValue%}{% print(o.falseValue, true); %}' +
+                    '{%#o.zeroValue%}{% print(o.zeroValue, true); %}',
+                data
+            ),
+            ''
+        );
+    });
+
     $.module('Evaluation', lifecycle);
 
     $.test('Escape HTML special characters with print(data)', function () {
@@ -166,7 +195,10 @@
 
     $.test('Else condition', function () {
         $.strictEqual(
-            $.tmpl('{% if (o.empty) { %}false{% } else { %}true{% } %}', data),
+            $.tmpl(
+                '{% if (o.undefinedValue) { %}false{% } else { %}true{% } %}',
+                data
+            ),
             'true'
         );
     });
