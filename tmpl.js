@@ -6,7 +6,7 @@
  * https://blueimp.net
  *
  * Licensed under the MIT license:
- * http://creativecommons.org/licenses/MIT/
+ * http://www.opensource.org/licenses/MIT
  *
  * Inspired by John Resig's JavaScript Micro-Templating:
  * http://ejohn.org/blog/javascript-micro-templating/

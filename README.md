@@ -37,7 +37,7 @@ var data = {
     "title": "JavaScript Templates",
     "license": {
         "name": "MIT license",
-        "url": "http://creativecommons.org/licenses/MIT/"
+        "url": "http://www.opensource.org/licenses/MIT"
     },
     "features": [
         "lightweight & fast",
@@ -306,4 +306,4 @@ For loop:
 ```
 
 ## License
-The JavaScript Templates script is released under the [MIT license](http://creativecommons.org/licenses/MIT/).
+The JavaScript Templates script is released under the [MIT license](http://www.opensource.org/licenses/MIT).
