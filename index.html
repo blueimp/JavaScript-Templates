@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
 /*
- * JavaScript Templates Demo 1.0.1
+ * JavaScript Templates Demo 1.0.2
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -15,25 +15,34 @@
 <head>
 <meta charset="utf-8">
 <title>JavaScript Templates Demo</title>
-<link rel="stylesheet" href="http://twitter.github.com/bootstrap/1.4.0/bootstrap.min.css">
-<!--[if lt IE 7]><link rel="stylesheet" href="http://blueimp.github.com/Bootstrap-Image-Gallery/bootstrap-ie6.min.css"><![endif]-->
-<style type="text/css">body {padding-top: 80px;}</style>
 <meta name="description" content="&lt; 1KB lightweight, fast &amp; powerful JavaScript templating engine with zero dependencies. Compatible with server-side environments like node.js, module loaders like RequireJS and all web browsers.">
+<link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap.min.css">
+<style>body{padding-top:60px;}</style>
+<link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-responsive.min.css">
+<!--[if lt IE 7]><link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-ie6.min.css"><![endif]-->
+<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 <body>
-<div class="topbar">
-    <div class="fill">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
         <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
             <a class="brand" href="https://github.com/blueimp/JavaScript-Templates">JavaScript Templates</a>
-            <ul class="nav">
-                <li class="active"><a href="#">Demo</a></li>
-                <li><a href="https://github.com/blueimp/JavaScript-Templates/downloads">Downloads</a></li>
-                <li><a href="https://github.com/blueimp/JavaScript-Templates">Source Code</a></li>
-                <li><a href="https://github.com/blueimp/JavaScript-Templates">Documentation</a></li>
-                <li><a href="https://github.com/blueimp/JavaScript-Templates/issues">Issues</a></li>
-                <li><a href="test/">Test</a></li>
-                <li><a href="https://blueimp.net">&copy; Sebastian Tschan</a></li>
-            </ul>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li class="active"><a href="#">Demo</a></li>
+                    <li><a href="https://github.com/blueimp/JavaScript-Templates/downloads">Downloads</a></li>
+                    <li><a href="https://github.com/blueimp/JavaScript-Templates">Source Code</a></li>
+                    <li><a href="https://github.com/blueimp/JavaScript-Templates">Documentation</a></li>
+                    <li><a href="https://github.com/blueimp/JavaScript-Templates/issues">Issues</a></li>
+                    <li><a href="test/">Test</a></li>
+                    <li><a href="https://blueimp.net">&copy; Sebastian Tschan</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -47,19 +56,19 @@
     </blockquote>
     <br>
     <div class="row">
-        <div class="span5">
+        <div class="span4">
             <h2>Template</h2>
-            <textarea class="xlarge" rows="15" id="template"></textarea>
+            <textarea class="span4" rows="15" id="template"></textarea>
         </div>
-        <div class="span5">
+        <div class="span4">
             <h2>Data (JSON)</h2>
-            <textarea class="xlarge" rows="15" id="data"></textarea>
+            <textarea class="span4" rows="15" id="data"></textarea>
         </div>
-        <div class="span6">
+        <div class="span4">
             <h2>Result</h2>
             <div class="well" id="result"></div>
             <p>
-                <button class="btn primary" id="render">Render</button>
+                <button class="btn btn-primary" id="render">Render</button>
                 <button class="btn" type="reset" id="reset">Reset</button>
             </p>
         </div>
@@ -95,8 +104,9 @@
 <code>{%=o%}</code>
 </script>
 <script src="tmpl.min.js"></script>
-<!-- jQuery is not required, but included for the demo -->
+<!-- jQuery and Bootstrap JS are not required, but included for the demo -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="http://blueimp.github.com/cdn/js/bootstrap.min.js"></script>
 <script>
 /*global window, jQuery, tmpl */
 (function ($) {
