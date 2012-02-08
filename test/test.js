@@ -9,18 +9,22 @@
  * http://www.opensource.org/licenses/MIT
  */
 
-/*global require */
+/*global beforeEach, afterEach, describe, it, expect, require */
 
-(function ($) {
+(function (expect, tmpl) {
     'use strict';
 
-    var lifecycle = {
-            setup: function () {},
-            teardown: function () {
-                // Purge the template cache:
-                $.tmpl.cache = {};
-            }
-        },
+    if (typeof require !== 'undefined') {
+        // Override the template loading method:
+        tmpl.load = function (id) {
+            return require('fs').readFileSync('./test/' + id + '.html', 'utf8');
+        };
+    }
+
+    var data;
+
+    beforeEach(function () {
+        // Initialize the sample data:
         data = {
             value: 'value',
             nullValue: null,
@@ -34,208 +38,208 @@
             deep: {
                 value: 'value'
             }
-        },
-        nodeQunit = {
-            setup: function () {},
-            teardown: function () {}
         };
-
-    if (!$.module) {
-        // Node.js QUnit compatible Testrunner:
-        nodeQunit = require('node-qunit');
-        $.module = nodeQunit.module;
-        $.test = nodeQunit.test;
-        $.strictEqual = nodeQunit.assert.strictEqual;
-        $.tmpl = require('../tmpl').tmpl;
-        // Override the template loading method:
-        $.tmpl.load = function (id) {
-            return require('fs').readFileSync('./test/' + id + '.html', 'utf8');
-        };
-    }
-
-    nodeQunit.setup();
-
-    $.module('Template loading', lifecycle);
-
-    $.test('String template', function () {
-        $.strictEqual(
-            $.tmpl('{%=o.value%}', data),
-            'value'
-        );
     });
 
-    $.test('Load template by id', function () {
-        $.strictEqual(
-            $.tmpl('template', data),
-            'value'
-        );
+    afterEach(function () {
+        // Purge the template cache:
+        tmpl.cache = {};
     });
 
-    $.test('Retun function when called without data parameter', function () {
-        $.strictEqual(
-            $.tmpl('{%=o.value%}')(data),
-            'value'
-        );
+    describe('Template loading', function () {
+
+        it('String template', function () {
+            expect(
+                tmpl('{%=o.value%}', data),
+                'value'
+            );
+        });
+
+        it('Load template by id', function () {
+            expect(
+                tmpl('template', data),
+                'value'
+            );
+        });
+
+        it('Retun function when called without data parameter', function () {
+            expect(
+                tmpl('{%=o.value%}')(data),
+                'value'
+            );
+        });
+
+        it('Cache templates loaded by id', function () {
+            tmpl('template');
+            expect(
+                tmpl.cache.template(data),
+                'value'
+            );
+        });
+
     });
 
-    $.test('Cache templates loaded by id', function () {
-        $.tmpl('template');
-        $.strictEqual(
-            $.tmpl.cache.template(data),
-            'value'
-        );
+    describe('Interpolation', function () {
+
+        it('Escape HTML special characters with {%=o.prop%}', function () {
+            expect(
+                tmpl('{%=o.special%}', data),
+                '&lt;&gt;&amp;&quot;'
+            );
+        });
+
+        it('Allow HTML special characters with {%#o.prop%}', function () {
+            expect(
+                tmpl('{%#o.special%}', data),
+                '<>&"\x00'
+            );
+        });
+
+        it('Function call', function () {
+            expect(
+                tmpl('{%=o.func()%}', data),
+                'value'
+            );
+        });
+
+        it('Dot notation', function () {
+            expect(
+                tmpl('{%=o.deep.value%}', data),
+                'value'
+            );
+        });
+
+        it('Handle single quotes', function () {
+            expect(
+                tmpl('\'single quotes\'{%=": \'"%}', data),
+                '\'single quotes\': \''
+            );
+        });
+
+        it('Handle double quotes', function () {
+            expect(
+                tmpl('"double quotes"{%=": \\""%}', data),
+                '"double quotes": &quot;'
+            );
+        });
+
+        it('Handle backslashes', function () {
+            expect(
+                tmpl('\\backslashes\\{%=": \\\\"%}', data),
+                '\\backslashes\\: \\'
+            );
+        });
+
+        it('Print empty string for escaped falsy values', function () {
+            expect(
+                tmpl(
+                    '{%=o.undefinedValue%}{% print(o.undefinedValue); %}' +
+                        '{%=o.nullValue%}{% print(o.nullValue); %}' +
+                        '{%=o.falseValue%}{% print(o.falseValue); %}' +
+                        '{%=o.zeroValue%}{% print(o.zeroValue); %}',
+                    data
+                )
+            ).to.be(
+                ''
+            );
+        });
+
+        it('Print empty string for unescaped falsy values', function () {
+            expect(
+                tmpl(
+                    '{%#o.undefinedValue%}{% print(o.undefinedValue, true); %}' +
+                        '{%#o.nullValue%}{% print(o.nullValue, true); %}' +
+                        '{%#o.falseValue%}{% print(o.falseValue, true); %}' +
+                        '{%#o.zeroValue%}{% print(o.zeroValue, true); %}',
+                    data
+                )
+            ).to.be(
+                ''
+            );
+        });
+
     });
 
-    $.module('Interpolation', lifecycle);
+    describe('Evaluation', function () {
 
-    $.test('Escape HTML special characters with {%=o.prop%}', function () {
-        $.strictEqual(
-            $.tmpl('{%=o.special%}', data),
-            '&lt;&gt;&amp;&quot;'
-        );
+        it('Escape HTML special characters with print(data)', function () {
+            expect(
+                tmpl('{% print(o.special); %}', data),
+                '&lt;&gt;&amp;&quot;'
+            );
+        });
+
+        it('Allow HTML special characters with print(data, true)', function () {
+            expect(
+                tmpl('{% print(o.special, true); %}', data),
+                '<>&"\x00'
+            );
+        });
+
+        it('Include template', function () {
+            expect(
+                tmpl('{% include("template", {value: "value"}); %}', data),
+                'value'
+            );
+        });
+
+        it('If condition', function () {
+            expect(
+                tmpl('{% if (o.value) { %}true{% } else { %}false{% } %}', data),
+                'true'
+            );
+        });
+
+        it('Else condition', function () {
+            expect(
+                tmpl(
+                    '{% if (o.undefinedValue) { %}false{% } else { %}true{% } %}',
+                    data
+                )
+            ).to.be(
+                'true'
+            );
+        });
+
+        it('For loop', function () {
+            expect(
+                tmpl(
+                    '{% for (var i=0; i<o.list.length; i++) { %}' +
+                        '{%=o.list[i]%}{% } %}',
+                    data
+                )
+            ).to.be(
+                '12345'
+            );
+        });
+
+        it('For loop print call', function () {
+            expect(
+                tmpl(
+                    '{% for (var i=0; i<o.list.length; i++) {' +
+                        'print(o.list[i]);} %}',
+                    data
+                )
+            ).to.be(
+                '12345'
+            );
+        });
+
+        it('For loop include template', function () {
+            expect(
+                tmpl(
+                    '{% for (var i=0; i<o.list.length; i++) {' +
+                        'include("template", {value: o.list[i]});} %}',
+                    data
+                )
+            ).to.be(
+                '12345'
+            );
+        });
+
     });
 
-    $.test('Allow HTML special characters with {%#o.prop%}', function () {
-        $.strictEqual(
-            $.tmpl('{%#o.special%}', data),
-            '<>&"\x00'
-        );
-    });
-
-    $.test('Function call', function () {
-        $.strictEqual(
-            $.tmpl('{%=o.func()%}', data),
-            'value'
-        );
-    });
-
-    $.test('Dot notation', function () {
-        $.strictEqual(
-            $.tmpl('{%=o.deep.value%}', data),
-            'value'
-        );
-    });
-
-    $.test('Handle single quotes', function () {
-        $.strictEqual(
-            $.tmpl('\'single quotes\'{%=": \'"%}', data),
-            '\'single quotes\': \''
-        );
-    });
-
-    $.test('Handle double quotes', function () {
-        $.strictEqual(
-            $.tmpl('"double quotes"{%=": \\""%}', data),
-            '"double quotes": &quot;'
-        );
-    });
-
-    $.test('Handle backslashes', function () {
-        $.strictEqual(
-            $.tmpl('\\backslashes\\{%=": \\\\"%}', data),
-            '\\backslashes\\: \\'
-        );
-    });
-
-    $.test('Print empty string for escaped falsy values', function () {
-        $.strictEqual(
-            $.tmpl(
-                '{%=o.undefinedValue%}{% print(o.undefinedValue); %}' +
-                    '{%=o.nullValue%}{% print(o.nullValue); %}' +
-                    '{%=o.falseValue%}{% print(o.falseValue); %}' +
-                    '{%=o.zeroValue%}{% print(o.zeroValue); %}',
-                data
-            ),
-            ''
-        );
-    });
-
-    $.test('Print empty string for unescaped falsy values', function () {
-        $.strictEqual(
-            $.tmpl(
-                '{%#o.undefinedValue%}{% print(o.undefinedValue, true); %}' +
-                    '{%#o.nullValue%}{% print(o.nullValue, true); %}' +
-                    '{%#o.falseValue%}{% print(o.falseValue, true); %}' +
-                    '{%#o.zeroValue%}{% print(o.zeroValue, true); %}',
-                data
-            ),
-            ''
-        );
-    });
-
-    $.module('Evaluation', lifecycle);
-
-    $.test('Escape HTML special characters with print(data)', function () {
-        $.strictEqual(
-            $.tmpl('{% print(o.special); %}', data),
-            '&lt;&gt;&amp;&quot;'
-        );
-    });
-
-    $.test('Allow HTML special characters with print(data, true)', function () {
-        $.strictEqual(
-            $.tmpl('{% print(o.special, true); %}', data),
-            '<>&"\x00'
-        );
-    });
-
-    $.test('Include template', function () {
-        $.strictEqual(
-            $.tmpl('{% include("template", {value: "value"}); %}', data),
-            'value'
-        );
-    });
-
-    $.test('If condition', function () {
-        $.strictEqual(
-            $.tmpl('{% if (o.value) { %}true{% } else { %}false{% } %}', data),
-            'true'
-        );
-    });
-
-    $.test('Else condition', function () {
-        $.strictEqual(
-            $.tmpl(
-                '{% if (o.undefinedValue) { %}false{% } else { %}true{% } %}',
-                data
-            ),
-            'true'
-        );
-    });
-
-    $.test('For loop', function () {
-        $.strictEqual(
-            $.tmpl(
-                '{% for (var i=0; i<o.list.length; i++) { %}' +
-                    '{%=o.list[i]%}{% } %}',
-                data
-            ),
-            '12345'
-        );
-    });
-
-    $.test('For loop print call', function () {
-        $.strictEqual(
-            $.tmpl(
-                '{% for (var i=0; i<o.list.length; i++) {' +
-                    'print(o.list[i]);} %}',
-                data
-            ),
-            '12345'
-        );
-    });
-
-    $.test('For loop include template', function () {
-        $.strictEqual(
-            $.tmpl(
-                '{% for (var i=0; i<o.list.length; i++) {' +
-                    'include("template", {value: o.list[i]});} %}',
-                data
-            ),
-            '12345'
-        );
-    });
-
-    nodeQunit.teardown();
-
-}(this));
+}(
+    this.expect || require('expect.js'),
+    this.tmpl || require('../tmpl').tmpl
+));
