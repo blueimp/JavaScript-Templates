@@ -75,8 +75,7 @@
         ",print=function(s,e){_s+=e&&(s||'')||_e(s);}" +
         ",include=function(s,d){_s+=_t(s,d);}";
     if (typeof define === "function" && define.amd) {
-        // Register as an AMD module:
-        define("tmpl", function () {
+        define(function () {
             return tmpl;
         });
     } else {
