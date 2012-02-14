@@ -33,12 +33,15 @@
         ast;
     // Extend the Templating engine with a print method for the generated functions:
     tmpl.print = function (str) {
-        var helper = helperRegexp.test(str) ? tmpl.helper : "";
+        // Only add helper functions if they are used inside of the template:
+        var helper = helperRegexp.test(str) ? tmpl.helper : "",
+            body = str.replace(tmpl.regexp, tmpl.func);
+        if (helper || (/_e\s*\(/.test(body))) {
+            helper = "_e=tmpl.encode" + helper + ",";
+        }
         return "function(" + tmpl.arg + ",tmpl){" +
-            ("var _s='',_e=tmpl.encode" + helper + ";_s+='" +
-            str.replace(tmpl.regexp, tmpl.func) +
-            "';return _s;").split("_s+='';").join("") +
-            "}";
+            ("var " + helper + "_s='" + body + "';return _s;")
+            .split("_s+='';").join("") + "}";
     };
     // Loop through the command line arguments:
     process.argv.forEach(function (file, index) {

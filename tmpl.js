@@ -22,9 +22,9 @@
                 tmpl(tmpl.load(str)) :
                     new Function(
                         tmpl.arg + ',tmpl',
-                        ("var _s='',_e=tmpl.encode" + tmpl.helper + ";_s+='" +
+                        ("var _e=tmpl.encode" + tmpl.helper + ",_s='" +
                             str.replace(tmpl.regexp, tmpl.func) +
-                            "';return _s;").split("_s+='';").join("")
+                            "';return _s;")
                     );
         return data ? f(data, tmpl) : function (data) {
             return f(data, tmpl);
