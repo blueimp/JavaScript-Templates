@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates 1.0.2
+ * JavaScript Templates 2.0
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -21,13 +21,14 @@
         var f = !/[^\-\w]/.test(str) ? tmpl.cache[str] = tmpl.cache[str] ||
                 tmpl(tmpl.load(str)) :
                     new Function(
-                        tmpl.arg,
-                        ("var _s=''" + tmpl.helper + ";_s+='" +
+                        tmpl.arg + ',tmpl',
+                        ("var _s='',_e=tmpl.encode" + tmpl.helper + ";_s+='" +
                             str.replace(tmpl.regexp, tmpl.func) +
                             "';return _s;").split("_s+='';").join("")
                     );
-        f.tmpl = f.tmpl || tmpl;
-        return data ? f(data) : f;
+        return data ? f(data, tmpl) : function (data) {
+            return f(data, tmpl);
+        };
     };
     tmpl.cache = {};
     tmpl.load = function (id) {
@@ -71,9 +72,8 @@
         );
     };
     tmpl.arg = "o";
-    tmpl.helper = ",_t=arguments.callee.tmpl,_e=_t.encode" +
-        ",print=function(s,e){_s+=e&&(s||'')||_e(s);}" +
-        ",include=function(s,d){_s+=_t(s,d);}";
+    tmpl.helper = ",print=function(s,e){_s+=e&&(s||'')||_e(s);}" +
+        ",include=function(s,d){_s+=tmpl(s,d);}";
     if (typeof define === "function" && define.amd) {
         define(function () {
             return tmpl;

@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates Test 1.0.2
+ * JavaScript Templates Test 2.0
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -72,9 +72,8 @@
         it('Cache templates loaded by id', function () {
             tmpl('template');
             expect(
-                tmpl.cache.template(data),
-                'value'
-            );
+                tmpl.cache.template
+            ).to.be.a('function');
         });
 
     });

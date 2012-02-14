@@ -12,10 +12,10 @@ Include the (minified) JavaScript Templates script in your HTML markup:
 <script src="tmpl.min.js"></script>
 ```
 
-Add a script section with type **"text/html"** and your template definition as content:
+Add a script section with type **"text/x-tmpl"**, a unique **id** property and your template definition as content:
 
 ```html
-<script type="text/html" id="tmpl-demo">
+<script type="text/x-tmpl" id="tmpl-demo">
 <h3>{%=o.title%}</h3>
 <p>Released under the
 <a href="{%=o.license.url%}">{%=o.license.name%}</a>.</p>
@@ -104,7 +104,7 @@ require("http").createServer(function (req, res) {
         console.log("Loading " + filename);
         return fs.readFileSync(filename, "utf8");
     };
-    res.writeHead(200, {"Content-Type": "text/html"});
+    res.writeHead(200, {"Content-Type": "text/x-tmpl"});
     // Render the content:
     res.end(tmpl("template", data));
 }).listen(8080, "localhost");
@@ -143,14 +143,15 @@ document.getElementById("result").innerHTML = func(data);
 ```
 
 ### Templates cache
-Templates loaded by id are cached in the map **tmpl.cache**, which can be modified:
+Templates loaded by id are cached in the map **tmpl.cache**:
 
 ```js
-var func = tmpl("tmpl-demo");
-var cached = typeof tmpl.cache["tmpl-demo"] === "function"; // true
+var func = tmpl("tmpl-demo"), // Loads and parses the template
+    cached = typeof tmpl.cache["tmpl-demo"] === "function", // true
+    result = tmpl("tmpl-demo", data); // Uses cached template function
 
-tmpl.cache["tmpl-demo"] = tmpl("<h3>{%=o.title%}</h3>");
-var result = tmpl("tmpl-demo", {title: "JS"}); // Renders "<h3>JS</h3>"
+tmpl.cache["tmpl-demo"] = null;
+result = tmpl("tmpl-demo", data); // Loads and parses the template again
 ```
 
 ### Output encoding
@@ -174,11 +175,11 @@ var output = tmpl.encode("<>&\"'\x00"); // Renders "&lt;&gt;&amp;&quot;&#39;"
 The local variables available inside the templates are the following:
 
 * **o**: The data object given as parameter to the template function (see the next section on how to modify the parameter name).
+* **tmpl**: A reference to the **tmpl** function object.
 * **_s**: The string for the rendered result content.
-* **_t**: A reference to the **tmpl** function object.
 * **_e**: A reference to the **tmpl.encode** method.
-* **print**: Function to add content to the rendered result string.
-* **include**: Function to include the return value of a different template in the result.
+* **print**: Helper function to add content to the rendered result string.
+* **include**: Helper function to include the return value of a different template in the result.
 
 To introduce additional local helper variables, the string **tmpl.helper** can be extended. The following adds a convenience function for *console.log* and a streaming function, that streams the template rendering result back to the callback argument (note the comma at the beginning of each variable declaration):
 
@@ -190,7 +191,7 @@ tmpl.helper += ",log=function(){console.log.apply(console, arguments)}" +
 Those new helper functions could be used to stream the template contents to the console output:
 
 ```html
-<script type="text/html" id="tmpl-demo">
+<script type="text/x-tmpl" id="tmpl-demo">
 <h3>{%=o.title%}</h3>
 {% stream(log); %}
 <p>Released under the
@@ -304,6 +305,28 @@ For loop:
 {% } %}
 </ul>
 ```
+
+## Compiled templates
+The JavaScript Templates project comes with a compilation script, that allows you to compile your templates into JavaScript code and combine them with a minimal Templates runtime into one minified JavaScript file.
+
+The compilation script is built for [node.js](http://nodejs.org/) and also requires [UglifyJS](https://github.com/mishoo/UglifyJS).  
+To use it, first install both the JavaScript Templates project and UglifyJS via [npm](http://npmjs.org/):
+
+```sh
+npm install uglify-js
+npm install blueimp-tmpl
+```
+
+This will put the executables **uglifyjs** and **tmpl.js** into the folder **node_modules/.bin**. It will also make them available on your PATH if you install the packages globally (by adding the **-g** flag to the install command).
+
+The **tmpl.js** executable accepts the paths to one or multiple template files as command line arguments and prints the generated JavaScript code to the console output. The following command line shows you how to store the generated code in a new JavaScript file that can be included in your project:
+
+```sh
+tmpl.js templates/upload.html templates/download.html > tmpl.min.js
+```
+
+The files given as command line arguments to **tmpl.js** can either be pure template files or HTML documents with embedded template script sections. For the pure template files, the file names (without extension) serve as template ids.  
+The generated file can be included in your project as a replacement for the original **tmpl.js** runtime. It provides you with the same API and provides a **tmpl(id, data)** function that accepts the id of one of your templates as first and a data object as optional second parameter.
 
 ## License
 The JavaScript Templates script is released under the [MIT license](http://www.opensource.org/licenses/MIT).
