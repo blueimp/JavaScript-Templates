@@ -34,7 +34,7 @@
     tmpl.load = function (id) {
         return document.getElementById(id).innerHTML;
     };
-    tmpl.regexp = /(\s+)|('|\\)(?![^%]*%\})|(?:\{%(=|#)(.+?)%\})|(\{%)|(%\})/g;
+    tmpl.regexp = /(\s+)|('|\\)(?![^%]*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
     tmpl.func = function (s, p1, p2, p3, p4, p5, p6, o, str) {
         if (p1) { // whitespace
             return o && o + s.length !== str.length ? " " : "";

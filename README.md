@@ -227,7 +227,7 @@ The template contents are matched and replaced using the regular expression **tm
 To use different tags for the template syntax, override **tmpl.regexp** with a modified regular expression, by exchanging all occurrences of "**\\{%**" and "**%\\}**", e.g. with "**\\[%**" and "**%\\]**":
 
 ```js
-tmpl.regexp = /(\s+)|('|\\)(?![^%]*%\])|(?:\[%(=|#)(.+?)%\])|(\[%)|(%\])/g;
+tmpl.regexp = /(\s+)|('|\\)(?![^%]*%\])|(?:\[%(=|#)([\s\S]+?)%\])|(\[%)|(%\])/g;
 ```
 
 ## Templates syntax
