@@ -17,6 +17,7 @@
     "use strict";
     var tmpl = require("./tmpl.js").tmpl,
         fs = require("fs"),
+        path = require("path"),
         jsp = require("uglify-js").parser,
         pro = require("uglify-js").uglify,
         // Retrieve the content of the minimal runtime:
@@ -63,6 +64,7 @@
             }
             if (listLength === list.length) {
                 // No template script tags found, use the complete content:
+                id = path.basename(file, path.extname(file));
                 list.push("'" + id + "':" + tmpl.print(content));
             }
         }
