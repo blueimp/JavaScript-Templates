@@ -41,8 +41,5 @@
     "bin": {
         "tmpl.js": "./compile.js"
     },
-    "files": [
-        "tmpl.js"
-    ],
     "main": "tmpl.js"
 }
