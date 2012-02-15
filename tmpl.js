@@ -34,33 +34,35 @@
     tmpl.load = function (id) {
         return document.getElementById(id).innerHTML;
     };
-    tmpl.regexp = /(\s+)|('|\\)(?![^%]*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
-    tmpl.func = function (s, p1, p2, p3, p4, p5, p6, o, str) {
-        if (p1) { // whitespace
-            return o && o + s.length !== str.length ? " " : "";
+    tmpl.regexp = /([\s'\\])(?![^%]*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
+    tmpl.func = function (s, p1, p2, p3, p4, p5) {
+        if (p1) { // whitespace, quote and backspace in interpolation context
+            return {
+                "\n": "\\n",
+                "\r": "\\r",
+                "\t": "\\t",
+                " " : " "
+            }[s] || "\\" + s;
         }
-        if (p2) { // single quote or backslash
-            return "\\" + s;
-        }
-        if (p3) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
-            if (p3 === "=") {
-                return "'+_e(" + p4 + ")+'";
+        if (p2) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
+            if (p2 === "=") {
+                return "'+_e(" + p3 + ")+'";
             }
-            return "'+(" + p4 + "||'')+'";
+            return "'+(" + p3 + "||'')+'";
         }
-        if (p5) { // evaluation start tag: {%
+        if (p4) { // evaluation start tag: {%
             return "';";
         }
-        if (p6) { // evaluation end tag: %}
+        if (p5) { // evaluation end tag: %}
             return "_s+='";
         }
     };
     tmpl.encReg = /[<>&"\x00]/g;
     tmpl.encMap = {
-        "<": "&lt;",
-        ">": "&gt;",
-        "&": "&amp;",
-        "\"": "&quot;",
+        "<"   : "&lt;",
+        ">"   : "&gt;",
+        "&"   : "&amp;",
+        "\""  : "&quot;",
         "\x00": ""
     };
     tmpl.encode = function (s) {

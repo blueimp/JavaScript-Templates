@@ -17,7 +17,8 @@
     if (typeof require !== 'undefined') {
         // Override the template loading method:
         tmpl.load = function (id) {
-            return require('fs').readFileSync('./test/' + id + '.html', 'utf8');
+            return require('fs')
+                .readFileSync('./test/' + id + '.html', 'utf8');
         };
     }
 
@@ -157,6 +158,17 @@
             );
         });
 
+        it('Preserve whitespace', function () {
+            expect(
+                tmpl(
+                    '\n\r\t{%=o.value%}  \n\r\t{%=o.value%}  ',
+                    data
+                )
+            ).to.be(
+                '\n\r\tvalue  \n\r\tvalue  '
+            );
+        });
+
     });
 
     describe('Evaluation', function () {
@@ -230,7 +242,7 @@
                     '{% for (var i=0; i<o.list.length; i++) {' +
                         'include("template", {value: o.list[i]});} %}',
                     data
-                )
+                ).replace(/[\r\n]/g, '')
             ).to.be(
                 '12345'
             );
