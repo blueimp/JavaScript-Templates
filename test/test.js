@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates Test 2.0
+ * JavaScript Templates Test 2.1.0
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -31,7 +31,7 @@
             nullValue: null,
             falseValue: false,
             zeroValue: 0,
-            special:  '<>&"\x00',
+            special:  '<>&"\'\x00',
             list: [1, 2, 3, 4, 5],
             func: function () {
                 return this.value;
@@ -84,14 +84,14 @@
         it('Escape HTML special characters with {%=o.prop%}', function () {
             expect(
                 tmpl('{%=o.special%}', data),
-                '&lt;&gt;&amp;&quot;'
+                '&lt;&gt;&amp;&quot;&#39;'
             );
         });
 
         it('Allow HTML special characters with {%#o.prop%}', function () {
             expect(
                 tmpl('{%#o.special%}', data),
-                '<>&"\x00'
+                '<>&"\'\x00'
             );
         });
 
@@ -176,14 +176,14 @@
         it('Escape HTML special characters with print(data)', function () {
             expect(
                 tmpl('{% print(o.special); %}', data),
-                '&lt;&gt;&amp;&quot;'
+                '&lt;&gt;&amp;&quot;&#39;'
             );
         });
 
         it('Allow HTML special characters with print(data, true)', function () {
             expect(
                 tmpl('{% print(o.special, true); %}', data),
-                '<>&"\x00'
+                '<>&"\'\x00'
             );
         });
 

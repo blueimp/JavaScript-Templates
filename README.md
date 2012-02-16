@@ -155,20 +155,18 @@ result = tmpl("tmpl-demo", data); // Loads and parses the template again
 ```
 
 ### Output encoding
-The method **tmpl.encode** is used to escape HTML special characters in template output:
+The method **tmpl.encode** is used to escape HTML special characters in the template output:
 
 ```js
-var output = tmpl.encode("<>&\"\x00"); // Renders "&lt;&gt;&amp;&quot;"
+var output = tmpl.encode("<>&\"'\x00"); // Renders "&lt;&gt;&amp;&quot;&#39;"
 ```
 
-**tmpl.encode** makes use of the regular expression **tmpl.encReg** and the encoding map **tmpl.encMap** to match and replace special characters, which can be modified to change the behavior of the output encoding:
+**tmpl.encode** makes use of the regular expression **tmpl.encReg** and the encoding map **tmpl.encMap** to match and replace special characters, which can be modified to change the behavior of the output encoding.  
+Strings matched by the regular expression, but not found in the encoding map are removed from the output. This allows for example to automatically trim input values (removing whitespace from the start and end of the string):
 
 ```js
-// Add single quotes to the encoding rules:
-tmpl.encReg = /[<>&"'\x00]/g;
-tmpl.encMap["'"] = "&#39;";
-
-var output = tmpl.encode("<>&\"'\x00"); // Renders "&lt;&gt;&amp;&quot;&#39;"
+tmpl.encReg = /(^\s+)|(\s+$)|[<>&"'\x00]/g;
+var output = tmpl.encode("    Banana!    "); // Renders "Banana" (without whitespace)
 ```
 
 ### Local helper variables

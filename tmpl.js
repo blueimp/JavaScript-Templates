@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates 2.0
+ * JavaScript Templates 2.1.0
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -57,19 +57,19 @@
             return "_s+='";
         }
     };
-    tmpl.encReg = /[<>&"\x00]/g;
+    tmpl.encReg = /[<>&"'\x00]/g;
     tmpl.encMap = {
         "<"   : "&lt;",
         ">"   : "&gt;",
         "&"   : "&amp;",
         "\""  : "&quot;",
-        "\x00": ""
+        "'"   : "&#39;"
     };
     tmpl.encode = function (s) {
         return String(s || "").replace(
             tmpl.encReg,
             function (c) {
-                return tmpl.encMap[c];
+                return tmpl.encMap[c] || "";
             }
         );
     };
