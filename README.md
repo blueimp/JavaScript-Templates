@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/blueimp/JavaScript-Templates.png)](http://travis-ci.org/blueimp/JavaScript-Templates)
 # JavaScript Templates
 
 ## Demo
