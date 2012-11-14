@@ -222,7 +222,7 @@ var result = tmpl("<h3>{%=p.title%}</h3>", {title: "JavaScript Templates"});
 ### Template parsing
 The template contents are matched and replaced using the regular expression **tmpl.regexp** and the replacement function **tmpl.func**. The replacement function operates based on the [parenthesized submatch strings](https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String/replace#Specifying_a_function_as_a_parameter).
 
-To use different tags for the template syntax, override **tmpl.regexp** with a modified regular expression, by exchanging all occurrences of "**\\{%**" and "**%\\}**", e.g. with "**\\[%**" and "**%\\]**":
+To use different tags for the template syntax, override **tmpl.regexp** with a modified regular expression, by exchanging all occurrences of "{%" and "%}", e.g. with "[%" and "%]":
 
 ```js
 tmpl.regexp = /([\s'\\])(?![^%]*%\])|(?:\[%(=|#)([\s\S]+?)%\])|(\[%)|(%\])/g;
@@ -300,7 +300,7 @@ Use **include(str, obj)** to include content from a different template:
 </div>
 ```
 
-If else condition:
+**If else condition**:
 
 ```html
 {% if (o.author.url) { %}
@@ -310,7 +310,7 @@ If else condition:
 {% } %}
 ```
 
-For loop:
+**For loop**:
 
 ```html
 <ul>
