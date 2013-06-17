@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates Test 2.1.0
+ * JavaScript Templates Test 2.2.0
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -11,14 +11,16 @@
 
 /*global beforeEach, afterEach, describe, it, expect, require */
 
-(function (expect, tmpl) {
+(function (context, expect, tmpl) {
     'use strict';
 
-    if (typeof require !== 'undefined') {
+    if (context.require === undefined) {
         // Override the template loading method:
         tmpl.load = function (id) {
-            return require('fs')
-                .readFileSync('./test/' + id + '.html', 'utf8');
+            switch (id) {
+            case 'template':
+                return '{%=o.value%}';
+            }
         };
     }
 
@@ -130,7 +132,7 @@
             );
         });
 
-        it('Print empty string for escaped falsy values', function () {
+        it('Print out escaped falsy values', function () {
             expect(
                 tmpl(
                     '{%=o.undefinedValue%}{% print(o.undefinedValue); %}' +
@@ -140,11 +142,11 @@
                     data
                 )
             ).to.be(
-                ''
+                'undefinedundefinednullnullfalsefalse00'
             );
         });
 
-        it('Print empty string for unescaped falsy values', function () {
+        it('Print out unescaped falsy values', function () {
             expect(
                 tmpl(
                     '{%#o.undefinedValue%}{% print(o.undefinedValue, true); %}' +
@@ -154,7 +156,7 @@
                     data
                 )
             ).to.be(
-                ''
+                'undefinedundefinednullnullfalsefalse00'
             );
         });
 
@@ -251,6 +253,7 @@
     });
 
 }(
+    this,
     this.expect || require('expect.js'),
     this.tmpl || require('../tmpl').tmpl
 ));

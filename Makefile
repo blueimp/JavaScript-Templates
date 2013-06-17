@@ -1,4 +1,4 @@
 .PHONY: js
 
 js:
-	uglifyjs -nc tmpl.js > tmpl.min.js
+	node_modules/.bin/uglifyjs tmpl.js -c -m -o tmpl.min.js
