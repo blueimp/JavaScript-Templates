@@ -66,7 +66,7 @@
         "'"   : "&#39;"
     };
     tmpl.encode = function (s) {
-        return String(s || "").replace(
+        return String(s + "" || "").replace(
             tmpl.encReg,
             function (c) {
                 return tmpl.encMap[c] || "";
