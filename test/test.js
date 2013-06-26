@@ -255,5 +255,5 @@
 }(
     this,
     this.expect || require('expect.js'),
-    this.tmpl || require('../tmpl').tmpl
+    this.tmpl || require('../js/tmpl').tmpl
 ));
