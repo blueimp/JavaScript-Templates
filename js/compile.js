@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
- * JavaScript Templates Compiler 2.1.0
+ * JavaScript Templates Compiler 2.2.0
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -10,7 +10,7 @@
  * http://www.opensource.org/licenses/MIT
  */
 
-/*jslint nomen: true */
+/*jslint nomen: true, stupid: true */
 /*global require, __dirname, process, console */
 
 (function () {
@@ -18,8 +18,7 @@
     var tmpl = require("./tmpl.js").tmpl,
         fs = require("fs"),
         path = require("path"),
-        jsp = require("uglify-js").parser,
-        pro = require("uglify-js").uglify,
+        uglifyJS = require("uglify-js"),
         // Retrieve the content of the minimal runtime:
         runtime = fs.readFileSync(__dirname + "/runtime.js", "utf8"),
         // A regular expression to parse templates from script tags in a HTML page:
@@ -30,8 +29,7 @@
         ),
         // A list to store the function bodies:
         list = [],
-        code,
-        ast;
+        code;
     // Extend the Templating engine with a print method for the generated functions:
     tmpl.print = function (str) {
         // Only add helper functions if they are used inside of the template:
@@ -47,11 +45,17 @@
     // Loop through the command line arguments:
     process.argv.forEach(function (file, index) {
         var listLength = list.length,
+            stats,
             content,
             result,
             id;
         // Skipt the first two arguments, which are "node" and the script:
         if (index > 1) {
+            stats = fs.statSync(file);
+            if (!stats.isFile()) {
+                console.error(file + ' is not a file.');
+                return;
+            }
             content = fs.readFileSync(file, "utf8");
             while (true) {
                 // Find templates in script tags:
@@ -69,14 +73,12 @@
             }
         }
     });
+    if (!list.length) {
+        console.error('Missing input file.');
+        return;
+    }
     // Combine the generated functions as cache of the minimal runtime:
     code = runtime.replace("{}", "{" + list.join(",") + "}");
-    // Parse the code and get the initial AST (Abstract Syntac Tree):
-    ast = jsp.parse(code);
-    // Get a new AST with mangled names:
-    ast = pro.ast_mangle(ast);
-    // Get an AST with compression optimizations:
-    ast = pro.ast_squeeze(ast);
-    // Generate the code and print it to the console output:
-    console.log(pro.gen_code(ast));
+    // Generate the minified code and print it to the console output:
+    console.log(uglifyJS.minify(code, {fromString: true}).code);
 }());

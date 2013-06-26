@@ -3,13 +3,16 @@
 ## Demo
 [JavaScript Templates Demo](http://blueimp.github.io/JavaScript-Templates/)
 
+## Description
+< 1KB lightweight, fast & powerful JavaScript templating engine with zero dependencies. Compatible with server-side environments like node.js, module loaders like RequireJS and all web browsers.
+
 ## Usage
 
 ### Client-side
 Include the (minified) JavaScript Templates script in your HTML markup:
 
 ```html
-<script src="tmpl.min.js"></script>
+<script src="js/tmpl.min.js"></script>
 ```
 
 Add a script section with type **"text/x-tmpl"**, a unique **id** property and your template definition as content:

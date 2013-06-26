@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
 /*
- * JavaScript Templates Demo 2.2.0
+ * JavaScript Templates Demo 2.2.1
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -20,65 +20,32 @@
 <title>JavaScript Templates Demo</title>
 <meta name="description" content="&lt; 1KB lightweight, fast &amp; powerful JavaScript templating engine with zero dependencies. Compatible with server-side environments like node.js, module loaders like RequireJS and all web browsers.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="http://blueimp.github.io/cdn/css/bootstrap.min.css">
-<style>body{padding-top:60px;}</style>
-<link rel="stylesheet" href="http://blueimp.github.io/cdn/css/bootstrap-responsive.min.css">
-<!--[if lt IE 7]>
-<link rel="stylesheet" href="http://blueimp.github.io/cdn/css/bootstrap-ie6.min.css">
-<![endif]-->
+<link rel="stylesheet" href="css/demo.css">
 </head>
 <body>
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <a class="brand" href="https://github.com/blueimp/JavaScript-Templates">JavaScript Templates</a>
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <li class="active"><a href="http://blueimp.github.io/JavaScript-Templates/">Demo</a></li>
-                    <li><a href="https://github.com/blueimp/JavaScript-Templates/tags">Downloads</a></li>
-                    <li><a href="https://github.com/blueimp/JavaScript-Templates">Source Code</a></li>
-                    <li><a href="https://github.com/blueimp/JavaScript-Templates">Documentation</a></li>
-                    <li><a href="https://github.com/blueimp/JavaScript-Templates/issues">Issues</a></li>
-                    <li><a href="test/">Test</a></li>
-                    <li><a href="https://blueimp.net">&copy; Sebastian Tschan</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="page-header">
-        <h1>JavaScript Templates Demo</h1>
-    </div>
-    <blockquote>
-        <p><strong>&lt; 1KB</strong> lightweight, fast &amp; powerful <a href="https://developer.mozilla.org/en/JavaScript/">JavaScript</a> templating engine with zero dependencies.<br>
-            Compatible with server-side environments like <a href="http://nodejs.org/">node.js</a>, module loaders like <a href="http://requirejs.org/">RequireJS</a> and all web browsers.</p>
-    </blockquote>
+<h1>JavaScript Templates Demo</h1>
+<p><strong>&lt; 1KB</strong> lightweight, fast &amp; powerful <a href="https://developer.mozilla.org/en/JavaScript/">JavaScript</a> templating engine with zero dependencies.<br>
+Compatible with server-side environments like <a href="http://nodejs.org/">node.js</a>, module loaders like <a href="http://requirejs.org/">RequireJS</a> and all web browsers.</p>
+<ul class="navigation">
+    <li><a href="https://github.com/blueimp/JavaScript-Templates/tags">Download</a></li>
+    <li><a href="https://github.com/blueimp/JavaScript-Templates">Source Code</a></li>
+    <li><a href="https://github.com/blueimp/JavaScript-Templates/blob/master/README.md">Documentation</a></li>
+    <li><a href="test/">Test</a></li>
+    <li><a href="https://blueimp.net">&copy; Sebastian Tschan</a></li>
+</ul>
+<form>
+    <h2>Template</h2>
+    <textarea rows="12" id="template"></textarea>
     <br>
-    <div class="row">
-        <div class="span4">
-            <h2>Template</h2>
-            <textarea class="span4" rows="15" id="template"></textarea>
-        </div>
-        <div class="span4">
-            <h2>Data (JSON)</h2>
-            <textarea class="span4" rows="15" id="data"></textarea>
-        </div>
-        <div class="span4">
-            <h2>Result</h2>
-            <div class="well" id="result"></div>
-            <p>
-                <button class="btn btn-primary" id="render">Render</button>
-                <button class="btn" type="reset" id="reset">Reset</button>
-            </p>
-        </div>
-    </div>
-</div>
+    <h2>Data (JSON)</h2>
+    <textarea rows="14" id="data"></textarea>
+    <br>
+    <button type="submit" id="render">Render</button>
+    <button type="reset" id="reset">Reset</button>
+    <h2>Result</h2>
+    <div id="result" class="result"></div>
+    <br>
+</form>
 <script type="text/x-tmpl" id="tmpl-demo">
 <h3>{%=o.title%}</h3>
 <p>Released under the
@@ -105,43 +72,11 @@
 }
 </script>
 <script type="text/x-tmpl" id="tmpl-error">
-<span class="label important">Error</span>
 <code>{%=o%}</code>
 </script>
-<script src="tmpl.min.js"></script>
-<!-- jQuery and Bootstrap JS are not required, but included for the demo -->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-<script src="http://blueimp.github.io/cdn/js/bootstrap.min.js"></script>
-<script>
-/*global window, jQuery, tmpl */
-(function ($) {
-    'use strict';
-    var render = function () {
-            var result;
-            try {
-                result = tmpl(
-                    $('#template').val(),
-                    $.parseJSON($('#data').val())
-                );
-            } catch (e) {
-                result = tmpl('tmpl-error', e);
-            }
-            $('#result').html(result);
-        },
-        init = function () {
-            $('#template').val($.trim($('#tmpl-demo').html()));
-            $('#data').val($.trim($('#tmpl-data').html()));
-            $('#result').empty();
-        };
-    $(window).on('error', function (e) {
-        $('#result').html(
-            tmpl('tmpl-error', e.originalEvent.message)
-        );
-    });
-    init();
-    $('#render').on('click', render);
-    $('#reset').on('click', init);
-}(jQuery));
-</script>
+<script src="js/tmpl.js"></script>
+<!-- jQuery is not required by JavaScript Templates, but included for the demo -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="js/demo.js"></script>
 </body> 
 </html>
