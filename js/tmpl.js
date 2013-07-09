@@ -76,8 +76,9 @@
     tmpl.arg = "o";
     tmpl.helper = ",print=function(s,e){_s+=e&&(s||'')||_e(s);}" +
         ",include=function(s,d){_s+=tmpl(s,d);}";
-    if (typeof define === "function" && define.amd) {
-        define(function () {
+    // requireJS/Almond module definition
+    if(typeof window.define === 'function' && window.define.amd) {
+        window.define('tmpl', [], function() {
             return tmpl;
         });
     } else {
