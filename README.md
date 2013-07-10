@@ -337,5 +337,14 @@ tmpl.js templates/upload.html templates/download.html > tmpl.min.js
 The files given as command line arguments to **tmpl.js** can either be pure template files or HTML documents with embedded template script sections. For the pure template files, the file names (without extension) serve as template ids.  
 The generated file can be included in your project as a replacement for the original **tmpl.js** runtime. It provides you with the same API and provides a **tmpl(id, data)** function that accepts the id of one of your templates as first and a data object as optional second parameter.
 
+## Tests
+The JavaScript Templates project comes with [Unit Tests](http://en.wikipedia.org/wiki/Unit_testing).  
+There are two different ways to run the tests:
+
+* Open test/index.html in your browser or
+* run `npm test` in the Terminal in the root path of the repository package.
+
+The first one tests the browser integration, the second one the [node.js](http://nodejs.org/) integration.
+
 ## License
 The JavaScript Templates script is released under the [MIT license](http://www.opensource.org/licenses/MIT).
