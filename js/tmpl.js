@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates 2.2.0
+ * JavaScript Templates 2.3.0
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -12,7 +12,7 @@
  * http://ejohn.org/blog/javascript-micro-templating/
  */
 
-/*jslint evil: true, regexp: true */
+/*jslint evil: true, regexp: true, unparam: true */
 /*global document, define */
 
 (function ($) {
@@ -34,15 +34,15 @@
     tmpl.load = function (id) {
         return document.getElementById(id).innerHTML;
     };
-    tmpl.regexp = /([\s'\\])(?![^%]*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
+    tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
     tmpl.func = function (s, p1, p2, p3, p4, p5) {
-        if (p1) { // whitespace, quote and backspace in interpolation context
+        if (p1) { // whitespace, quote and backspace in HTML context
             return {
                 "\n": "\\n",
                 "\r": "\\r",
                 "\t": "\\t",
                 " " : " "
-            }[s] || "\\" + s;
+            }[p1] || "\\" + p1;
         }
         if (p2) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
             if (p2 === "=") {

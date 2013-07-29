@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates Test 2.2.0
+ * JavaScript Templates Test 2.3.0
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -247,6 +247,17 @@
                 ).replace(/[\r\n]/g, '')
             ).to.be(
                 '12345'
+            );
+        });
+
+        it('Modulo operator', function () {
+            expect(
+                tmpl(
+                    '{% if (o.list.length % 5 === 0) { %}5 list items{% } %}',
+                    data
+                ).replace(/[\r\n]/g, '')
+            ).to.be(
+                '5 list items'
             );
         });
 

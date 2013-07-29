@@ -228,7 +228,7 @@ The template contents are matched and replaced using the regular expression **tm
 To use different tags for the template syntax, override **tmpl.regexp** with a modified regular expression, by exchanging all occurrences of "{%" and "%}", e.g. with "[%" and "%]":
 
 ```js
-tmpl.regexp = /([\s'\\])(?![^%]*%\])|(?:\[%(=|#)([\s\S]+?)%\])|(\[%)|(%\])/g;
+tmpl.regexp = /([\s'\\])(?!(?:[^[]|\[(?!%))*%\])|(?:\[%(=|#)([\s\S]+?)%\])|(\[%)|(%\])/g;
 ```
 
 By default, the plugin preserves whitespace (newlines, carriage returns, tabs and spaces). To strip unnecessary whitespace, you can override the **tmpl.func** function, e.g. with the following code:
