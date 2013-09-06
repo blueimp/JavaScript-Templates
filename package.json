@@ -1,6 +1,6 @@
 {
     "name": "blueimp-tmpl",
-    "version": "2.3.1",
+    "version": "2.4.0",
     "title": "JavaScript Templates",
     "description": "< 1KB lightweight, fast & powerful JavaScript templating engine with zero dependencies. Compatible with server-side environments like node.js, module loaders like RequireJS and all web browsers.",
     "keywords": [
@@ -31,9 +31,9 @@
         }
     ],
     "devDependencies": {
-        "mocha": "1.11.0",
+        "mocha": "1.12.1",
         "expect.js": "0.2.0",
-        "uglify-js": "2.3.6"
+        "uglify-js": "2.4.0"
     },
     "scripts": {
         "test": "mocha --reporter spec"

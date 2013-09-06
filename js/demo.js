@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates Demo JS 2.2.1
+ * JavaScript Templates Demo JS 2.4.0
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2013, Sebastian Tschan

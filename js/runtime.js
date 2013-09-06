@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates Runtime 2.2.0
+ * JavaScript Templates Runtime 2.4.0
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -29,7 +29,7 @@
         "'"   : "&#39;"
     };
     tmpl.encode = function (s) {
-        return String(s).replace(
+        return (s == null ? "" : "" + s).replace(
             tmpl.encReg,
             function (c) {
                 return tmpl.encMap[c] || "";

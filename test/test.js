@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates Test 2.3.0
+ * JavaScript Templates Test 2.4.0
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -132,31 +132,31 @@
             );
         });
 
-        it('Print out escaped falsy values', function () {
+        it('Interpolate escaped falsy values except undefined or null', function () {
             expect(
                 tmpl(
-                    '{%=o.undefinedValue%}{% print(o.undefinedValue); %}' +
-                        '{%=o.nullValue%}{% print(o.nullValue); %}' +
-                        '{%=o.falseValue%}{% print(o.falseValue); %}' +
-                        '{%=o.zeroValue%}{% print(o.zeroValue); %}',
+                    '{%=o.undefinedValue%}' +
+                        '{%=o.nullValue%}' +
+                        '{%=o.falseValue%}' +
+                        '{%=o.zeroValue%}',
                     data
                 )
             ).to.be(
-                'undefinedundefinednullnullfalsefalse00'
+                'false0'
             );
         });
 
-        it('Print out unescaped falsy values', function () {
+        it('Interpolate unescaped falsy values except undefined or null', function () {
             expect(
                 tmpl(
-                    '{%#o.undefinedValue%}{% print(o.undefinedValue, true); %}' +
-                        '{%#o.nullValue%}{% print(o.nullValue, true); %}' +
-                        '{%#o.falseValue%}{% print(o.falseValue, true); %}' +
-                        '{%#o.zeroValue%}{% print(o.zeroValue, true); %}',
+                    '{%#o.undefinedValue%}' +
+                        '{%#o.nullValue%}' +
+                        '{%#o.falseValue%}' +
+                        '{%#o.zeroValue%}',
                     data
                 )
             ).to.be(
-                'undefinedundefinednullnullfalsefalse00'
+                'false0'
             );
         });
 
@@ -186,6 +186,34 @@
             expect(
                 tmpl('{% print(o.special, true); %}', data),
                 '<>&"\'\x00'
+            );
+        });
+
+        it('Print out escaped falsy values except undefined or null', function () {
+            expect(
+                tmpl(
+                    '{% print(o.undefinedValue); %}' +
+                        '{% print(o.nullValue); %}' +
+                        '{% print(o.falseValue); %}' +
+                        '{% print(o.zeroValue); %}',
+                    data
+                )
+            ).to.be(
+                'false0'
+            );
+        });
+
+        it('Print out unescaped falsy values except undefined or null', function () {
+            expect(
+                tmpl(
+                    '{% print(o.undefinedValue, true); %}' +
+                        '{% print(o.nullValue, true); %}' +
+                        '{% print(o.falseValue, true); %}' +
+                        '{% print(o.zeroValue, true); %}',
+                    data
+                )
+            ).to.be(
+                'false0'
             );
         });
 

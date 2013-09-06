@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
- * JavaScript Templates Compiler 2.2.0
+ * JavaScript Templates Compiler 2.4.0
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
