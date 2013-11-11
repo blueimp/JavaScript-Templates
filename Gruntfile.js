@@ -1,6 +1,6 @@
 /*
- * JavaScript Load Image Gruntfile
- * https://github.com/blueimp/JavaScript-Load-Image
+ * JavaScript Templates Gruntfile
+ * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2013, Sebastian Tschan
  * https://blueimp.net
