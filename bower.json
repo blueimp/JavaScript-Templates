@@ -1,6 +1,6 @@
 {
   "name": "blueimp-tmpl",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "title": "JavaScript Templates",
   "description": "< 1KB lightweight, fast & powerful JavaScript templating engine with zero dependencies. Compatible with server-side environments like node.js, module loaders like RequireJS and all web browsers.",
   "keywords": [
@@ -30,11 +30,6 @@
       "url": "http://www.opensource.org/licenses/MIT"
     }
   ],
-  "devDependencies": {
-    "mocha": "1.11.0",
-    "expect.js": "0.2.0",
-    "uglify-js": "2.3.6"
-  },
   "main": "js/tmpl.js",
   "ignore": [
     "/*.*",
