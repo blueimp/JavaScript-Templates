@@ -53,21 +53,24 @@
 
         it('String template', function () {
             expect(
-                tmpl('{%=o.value%}', data),
+                tmpl('{%=o.value%}', data)
+            ).to.be(
                 'value'
             );
         });
 
         it('Load template by id', function () {
             expect(
-                tmpl('template', data),
+                tmpl('template', data)
+            ).to.be(
                 'value'
             );
         });
 
         it('Retun function when called without data parameter', function () {
             expect(
-                tmpl('{%=o.value%}')(data),
+                tmpl('{%=o.value%}')(data)
+            ).to.be(
                 'value'
             );
         });
@@ -85,49 +88,56 @@
 
         it('Escape HTML special characters with {%=o.prop%}', function () {
             expect(
-                tmpl('{%=o.special%}', data),
+                tmpl('{%=o.special%}', data)
+            ).to.be(
                 '&lt;&gt;&amp;&quot;&#39;'
             );
         });
 
         it('Allow HTML special characters with {%#o.prop%}', function () {
             expect(
-                tmpl('{%#o.special%}', data),
+                tmpl('{%#o.special%}', data)
+            ).to.be(
                 '<>&"\'\x00'
             );
         });
 
         it('Function call', function () {
             expect(
-                tmpl('{%=o.func()%}', data),
+                tmpl('{%=o.func()%}', data)
+            ).to.be(
                 'value'
             );
         });
 
         it('Dot notation', function () {
             expect(
-                tmpl('{%=o.deep.value%}', data),
+                tmpl('{%=o.deep.value%}', data)
+            ).to.be(
                 'value'
             );
         });
 
         it('Handle single quotes', function () {
             expect(
-                tmpl('\'single quotes\'{%=": \'"%}', data),
-                '\'single quotes\': \''
+                tmpl('\'single quotes\'{%=": \'"%}', data)
+            ).to.be(
+                '\'single quotes\': &#39;'
             );
         });
 
         it('Handle double quotes', function () {
             expect(
-                tmpl('"double quotes"{%=": \\""%}', data),
+                tmpl('"double quotes"{%=": \\""%}', data)
+            ).to.be(
                 '"double quotes": &quot;'
             );
         });
 
         it('Handle backslashes', function () {
             expect(
-                tmpl('\\backslashes\\{%=": \\\\"%}', data),
+                tmpl('\\backslashes\\{%=": \\\\"%}', data)
+            ).to.be(
                 '\\backslashes\\: \\'
             );
         });
@@ -177,14 +187,16 @@
 
         it('Escape HTML special characters with print(data)', function () {
             expect(
-                tmpl('{% print(o.special); %}', data),
+                tmpl('{% print(o.special); %}', data)
+            ).to.be(
                 '&lt;&gt;&amp;&quot;&#39;'
             );
         });
 
         it('Allow HTML special characters with print(data, true)', function () {
             expect(
-                tmpl('{% print(o.special, true); %}', data),
+                tmpl('{% print(o.special, true); %}', data)
+            ).to.be(
                 '<>&"\'\x00'
             );
         });
@@ -219,14 +231,16 @@
 
         it('Include template', function () {
             expect(
-                tmpl('{% include("template", {value: "value"}); %}', data),
+                tmpl('{% include("template", {value: "value"}); %}', data)
+            ).to.be(
                 'value'
             );
         });
 
         it('If condition', function () {
             expect(
-                tmpl('{% if (o.value) { %}true{% } else { %}false{% } %}', data),
+                tmpl('{% if (o.value) { %}true{% } else { %}false{% } %}', data)
+            ).to.be(
                 'true'
             );
         });
