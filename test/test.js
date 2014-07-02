@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates Test 2.4.1
+ * JavaScript Templates Test 2.4.2
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -9,7 +9,7 @@
  * http://www.opensource.org/licenses/MIT
  */
 
-/*global beforeEach, afterEach, describe, it, expect, require */
+/*global beforeEach, afterEach, describe, it, require */
 
 (function (context, expect, tmpl) {
     'use strict';
