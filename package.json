@@ -31,13 +31,13 @@
     }
   ],
   "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-uglify": "~0.2.7",
-    "grunt-contrib-jshint": "~0.7.1",
-    "grunt-bump-build-git": "~1.0.0",
+    "grunt": "~0.4.5",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-bump-build-git": "~1.1.1",
     "grunt-simple-mocha": "~0.4.0",
-    "grunt-mocha": "~0.4.1",
-    "expect.js": "0.2.0"
+    "grunt-mocha": "~0.4.11",
+    "expect.js": "0.3.1"
   },
   "scripts": {
     "test": "grunt test"
