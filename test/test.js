@@ -54,7 +54,7 @@
         it('String template', function () {
             expect(
                 tmpl('{%=o.value%}', data)
-            ).to.eql(
+            ).to.be(
                 'value'
             );
         });
@@ -62,7 +62,7 @@
         it('Load template by id', function () {
             expect(
                 tmpl('template', data)
-            ).to.eql(
+            ).to.be(
                 'value'
             );
         });
@@ -70,7 +70,7 @@
         it('Retun function when called without data parameter', function () {
             expect(
                 tmpl('{%=o.value%}')(data)
-            ).to.eql(
+            ).to.be(
                 'value'
             );
         });
@@ -89,7 +89,7 @@
         it('Escape HTML special characters with {%=o.prop%}', function () {
             expect(
                 tmpl('{%=o.special%}', data)
-            ).to.eql(
+            ).to.be(
                 '&lt;&gt;&amp;&quot;&#39;'
             );
         });
@@ -97,7 +97,7 @@
         it('Allow HTML special characters with {%#o.prop%}', function () {
             expect(
                 tmpl('{%#o.special%}', data)
-            ).to.eql(
+            ).to.be(
                 '<>&"\'\x00'
             );
         });
@@ -105,7 +105,7 @@
         it('Function call', function () {
             expect(
                 tmpl('{%=o.func()%}', data)
-            ).to.eql(
+            ).to.be(
                 'value'
             );
         });
@@ -113,7 +113,7 @@
         it('Dot notation', function () {
             expect(
                 tmpl('{%=o.deep.value%}', data)
-            ).to.eql(
+            ).to.be(
                 'value'
             );
         });
@@ -121,7 +121,7 @@
         it('Handle single quotes', function () {
             expect(
                 tmpl('\'single quotes\'{%=": \'"%}', data)
-            ).to.eql(
+            ).to.be(
                 '\'single quotes\': &#39;'
             );
         });
@@ -129,7 +129,7 @@
         it('Handle double quotes', function () {
             expect(
                 tmpl('"double quotes"{%=": \\""%}', data)
-            ).to.eql(
+            ).to.be(
                 '"double quotes": &quot;'
             );
         });
@@ -137,7 +137,7 @@
         it('Handle backslashes', function () {
             expect(
                 tmpl('\\backslashes\\{%=": \\\\"%}', data)
-            ).to.eql(
+            ).to.be(
                 '\\backslashes\\: \\'
             );
         });
@@ -151,7 +151,7 @@
                         '{%=o.zeroValue%}',
                     data
                 )
-            ).to.eql(
+            ).to.be(
                 'false0'
             );
         });
@@ -165,7 +165,7 @@
                         '{%#o.zeroValue%}',
                     data
                 )
-            ).to.eql(
+            ).to.be(
                 'false0'
             );
         });
@@ -176,7 +176,7 @@
                     '\n\r\t{%=o.value%}  \n\r\t{%=o.value%}  ',
                     data
                 )
-            ).to.eql(
+            ).to.be(
                 '\n\r\tvalue  \n\r\tvalue  '
             );
         });
@@ -188,7 +188,7 @@
         it('Escape HTML special characters with print(data)', function () {
             expect(
                 tmpl('{% print(o.special); %}', data)
-            ).to.eql(
+            ).to.be(
                 '&lt;&gt;&amp;&quot;&#39;'
             );
         });
@@ -196,7 +196,7 @@
         it('Allow HTML special characters with print(data, true)', function () {
             expect(
                 tmpl('{% print(o.special, true); %}', data)
-            ).to.eql(
+            ).to.be(
                 '<>&"\'\x00'
             );
         });
@@ -210,7 +210,7 @@
                         '{% print(o.zeroValue); %}',
                     data
                 )
-            ).to.eql(
+            ).to.be(
                 'false0'
             );
         });
@@ -224,7 +224,7 @@
                         '{% print(o.zeroValue, true); %}',
                     data
                 )
-            ).to.eql(
+            ).to.be(
                 'false0'
             );
         });
@@ -232,7 +232,7 @@
         it('Include template', function () {
             expect(
                 tmpl('{% include("template", {value: "value"}); %}', data)
-            ).to.eql(
+            ).to.be(
                 'value'
             );
         });
@@ -240,7 +240,7 @@
         it('If condition', function () {
             expect(
                 tmpl('{% if (o.value) { %}true{% } else { %}false{% } %}', data)
-            ).to.eql(
+            ).to.be(
                 'true'
             );
         });
@@ -251,7 +251,7 @@
                     '{% if (o.undefinedValue) { %}false{% } else { %}true{% } %}',
                     data
                 )
-            ).to.eql(
+            ).to.be(
                 'true'
             );
         });
@@ -263,7 +263,7 @@
                         '{%=o.list[i]%}{% } %}',
                     data
                 )
-            ).to.eql(
+            ).to.be(
                 '12345'
             );
         });
@@ -275,7 +275,7 @@
                         'print(o.list[i]);} %}',
                     data
                 )
-            ).to.eql(
+            ).to.be(
                 '12345'
             );
         });
@@ -287,7 +287,7 @@
                         'include("template", {value: o.list[i]});} %}',
                     data
                 ).replace(/[\r\n]/g, '')
-            ).to.eql(
+            ).to.be(
                 '12345'
             );
         });
@@ -298,7 +298,7 @@
                     '{% if (o.list.length % 5 === 0) { %}5 list items{% } %}',
                     data
                 ).replace(/[\r\n]/g, '')
-            ).to.eql(
+            ).to.be(
                 '5 list items'
             );
         });
