@@ -1,7 +1,7 @@
 # JavaScript Templates
 
 ## Demo
-[JavaScript Templates Demo](http://blueimp.github.io/JavaScript-Templates/)
+[JavaScript Templates Demo](https://blueimp.github.io/JavaScript-Templates/)
 
 ## Description
 < 1KB lightweight, fast & powerful JavaScript templating engine with zero dependencies. Compatible with server-side environments like node.js, module loaders like RequireJS and all web browsers.
@@ -62,7 +62,7 @@ document.getElementById("result").innerHTML = tmpl("tmpl-demo", data);
 
 The following is an example how to use the JavaScript Templates engine on the server-side with [node.js](http://nodejs.org/).
 
-Create a new directory and add the **tmpl.js** file. Or alternatively, install the **blueimp-tmpl** package with [npm](http://npmjs.org/):
+Create a new directory and add the **tmpl.js** file. Or alternatively, install the **blueimp-tmpl** package with [npm](https://www.npmjs.org/):
 
 ```sh
 npm install blueimp-tmpl
@@ -291,7 +291,7 @@ Use **include(str, obj)** to include content from a different template:
 
 ```html
 <div>
-{% include('tmpl-link', {name: "Website", url: "http://example.org"}); %}
+{% include('tmpl-link', {name: "Website", url: "https://example.org"}); %}
 </div>
 ```
 
@@ -319,7 +319,7 @@ Use **include(str, obj)** to include content from a different template:
 The JavaScript Templates project comes with a compilation script, that allows you to compile your templates into JavaScript code and combine them with a minimal Templates runtime into one minified JavaScript file.
 
 The compilation script is built for [node.js](http://nodejs.org/) and also requires [UglifyJS](https://github.com/mishoo/UglifyJS).  
-To use it, first install both the JavaScript Templates project and UglifyJS via [npm](http://npmjs.org/):
+To use it, first install both the JavaScript Templates project and UglifyJS via [npm](https://www.npmjs.org/):
 
 ```sh
 npm install uglify-js
@@ -338,7 +338,7 @@ The files given as command line arguments to **tmpl.js** can either be pure temp
 The generated file can be included in your project as a replacement for the original **tmpl.js** runtime. It provides you with the same API and provides a **tmpl(id, data)** function that accepts the id of one of your templates as first and a data object as optional second parameter.
 
 ## Tests
-The JavaScript Templates project comes with [Unit Tests](http://en.wikipedia.org/wiki/Unit_testing).  
+The JavaScript Templates project comes with [Unit Tests](https://en.wikipedia.org/wiki/Unit_testing).  
 There are two different ways to run the tests:
 
 * Open test/index.html in your browser or
