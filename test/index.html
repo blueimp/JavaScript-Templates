@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <!--
 /*
- * JavaScript Templates Test 2.4.1
+ * JavaScript Templates Test 2.5.0
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -19,19 +19,21 @@
 <meta charset="utf-8">
 <title>JavaScript Templates Test</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="http://blueimp.github.io/cdn/css/mocha.min.css">
+<link rel="stylesheet" href="https://blueimp.github.io/cdn/css/mocha.min.css">
 </head>
 <body>
 <div id="mocha"></div>
-<script src="http://blueimp.github.io/cdn/js/mocha.min.js"></script>
-<script src="http://blueimp.github.io/cdn/js/expect.min.js"></script>
+<script src="https://blueimp.github.io/cdn/js/mocha.min.js"></script>
+<script src="https://blueimp.github.io/cdn/js/expect.min.js"></script>
 <script>
+/* global mocha */
 mocha.setup('bdd');
 </script>
 <script type="text/x-tmpl" id="template">{%=o.value%}</script>
 <script src="../js/tmpl.js"></script>
 <script src="test.js"></script>
 <script>
+/* global window, mocha */
 if (!window.PHANTOMJS) {
 	mocha.checkLeaks();
 	mocha.run();
