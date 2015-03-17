@@ -18,6 +18,9 @@
 (function ($) {
     "use strict";
     var tmpl = function (str, data) {
+        if(typeof(str) !== 'string'){
+            throw new Error('str must be a string');
+        }
         var f = !/[^\w\-\.:]/.test(str) ? tmpl.cache[str] = tmpl.cache[str] ||
                 tmpl(tmpl.load(str)) :
                     new Function(
@@ -32,7 +35,11 @@
     };
     tmpl.cache = {};
     tmpl.load = function (id) {
-        return document.getElementById(id).innerHTML;
+        var node =  document.getElementById(id);
+        if(!node){
+            throw new Error('DOM Node '+id+' not found');
+        }
+        return node.innerHTML;
     };
     tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
     tmpl.func = function (s, p1, p2, p3, p4, p5) {
