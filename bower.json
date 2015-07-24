@@ -24,8 +24,7 @@
     "url": "git://github.com/blueimp/JavaScript-Templates.git"
   },
   "bugs": "https://github.com/blueimp/JavaScript-Templates/issues",
-  "license": "MIT"
-  ],
+  "license": "MIT",
   "main": "js/tmpl.js",
   "ignore": [
     "/*.*",
