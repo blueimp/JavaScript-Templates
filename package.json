@@ -1,6 +1,6 @@
 {
   "name": "blueimp-tmpl",
-  "version": "2.5.4",
+  "version": "2.5.5",
   "title": "JavaScript Templates",
   "description": "< 1KB lightweight, fast & powerful JavaScript templating engine with zero dependencies. Compatible with server-side environments like node.js, module loaders like RequireJS and all web browsers.",
   "keywords": [
@@ -24,19 +24,13 @@
     "url": "git://github.com/blueimp/JavaScript-Templates.git"
   },
   "bugs": "https://github.com/blueimp/JavaScript-Templates/issues",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://www.opensource.org/licenses/MIT"
-    }
-  ],
+  "license": "MIT",
   "devDependencies": {
     "grunt": "~0.4.5",
     "grunt-contrib-uglify": "~0.5.0",
     "grunt-contrib-jshint": "~0.10.0",
     "grunt-bump-build-git": "~1.1.1",
     "grunt-simple-mocha": "~0.4.0",
-    "grunt-mocha": "~0.4.11",
     "expect.js": "0.3.1"
   },
   "scripts": {

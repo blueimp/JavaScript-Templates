@@ -35,20 +35,6 @@ module.exports = function (grunt) {
                 src: ['test/test.js']
             }
         },
-        mocha: {
-            all: {
-                src: ['test/index.html'],
-                options: {
-                    run: true,
-                    bail: true,
-                    log: true,
-                    reporter: 'Spec'
-                },
-                mocha: {
-                    ignoreLeaks: false
-                }
-            }
-        },
         uglify: {
             production: {
                 src: [
@@ -61,11 +47,10 @@ module.exports = function (grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-simple-mocha');
-    grunt.loadNpmTasks('grunt-mocha');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-bump-build-git');
 
-    grunt.registerTask('test', ['jshint', 'simplemocha', 'mocha']);
+    grunt.registerTask('test', ['jshint', 'simplemocha']);
     grunt.registerTask('default', ['test', 'uglify']);
 
 };
