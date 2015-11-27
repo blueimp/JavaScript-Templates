@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates Runtime 2.4.1
+ * JavaScript Templates Runtime
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -9,10 +9,10 @@
  * http://www.opensource.org/licenses/MIT
  */
 
-/*jslint sloppy: true */
 /*global define */
 
 (function ($) {
+    "use strict";
     var tmpl = function (id, data) {
         var f = tmpl.cache[id];
         return data ? f(data, tmpl) : function (data) {

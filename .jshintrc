@@ -13,7 +13,7 @@
   "noempty"       : true,     // true: Prohibit use of empty blocks
   "nonew"         : true,     // true: Prohibit use of constructors for side-effects (without assignment)
   "plusplus"      : false,    // true: Prohibit use of `++` & `--`
-  "quotmark"      : "single", // Quotation mark consistency:
+  "quotmark"      : true,     // Quotation mark consistency:
                               //   false    : do nothing (default)
                               //   true     : ensure whatever is used is consistent
                               //   "single" : require single quotes

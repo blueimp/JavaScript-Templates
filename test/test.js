@@ -1,5 +1,5 @@
 /*
- * JavaScript Templates Test 2.4.2
+ * JavaScript Templates Test
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan

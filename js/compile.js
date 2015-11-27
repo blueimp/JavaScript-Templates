@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /*
- * JavaScript Templates Compiler 2.4.0
+ * JavaScript Templates Compiler
  * https://github.com/blueimp/JavaScript-Templates
  *
  * Copyright 2011, Sebastian Tschan
@@ -53,7 +53,7 @@
         if (index > 1) {
             stats = fs.statSync(file);
             if (!stats.isFile()) {
-                console.error(file + ' is not a file.');
+                console.error(file + " is not a file.");
                 return;
             }
             content = fs.readFileSync(file, "utf8");
@@ -74,7 +74,7 @@
         }
     });
     if (!list.length) {
-        console.error('Missing input file.');
+        console.error("Missing input file.");
         return;
     }
     // Combine the generated functions as cache of the minimal runtime:
