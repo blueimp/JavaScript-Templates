@@ -395,7 +395,7 @@ There are two different ways to run the tests:
 * run `npm test` in the Terminal in the root path of the repository package.
 
 The first one tests the browser integration,
-the second one the[node.js](http://nodejs.org/) integration.
+the second one the [node.js](http://nodejs.org/) integration.
 
 ## License
 The JavaScript Templates script is released under the
