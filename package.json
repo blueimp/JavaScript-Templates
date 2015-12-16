@@ -39,4 +39,23 @@
     "tmpl.js": "js/compile.js"
   },
   "main": "js/tmpl.js"
+  "main": "js/tmpl.js",
+  "jshintConfig": {
+    "bitwise": true,
+    "curly": true,
+    "eqeqeq": true,
+    "forin": true,
+    "freeze": true,
+    "immed": true,
+    "latedef": true,
+    "newcap": true,
+    "noarg": true,
+    "noempty": true,
+    "nonbsp": true,
+    "nonew": true,
+    "quotmark": true,
+    "undef": true,
+    "unused": true,
+    "strict": true
+  }
 }
