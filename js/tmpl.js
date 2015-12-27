@@ -13,7 +13,7 @@
  */
 
 /*jshint evil: true */
-/*global document, define */
+/*global document, define, module */
 
 (function ($) {
     "use strict";
@@ -81,6 +81,8 @@
         define(function () {
             return tmpl;
         });
+    } else if (typeof module === "object" && module.exports) {
+        module.exports = tmpl;
     } else {
         $.tmpl = tmpl;
     }

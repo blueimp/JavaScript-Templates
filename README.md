@@ -4,9 +4,9 @@
 [JavaScript Templates Demo](https://blueimp.github.io/JavaScript-Templates/)
 
 ## Description
-< 1KB lightweight, fast & powerful JavaScript templating engine with zero
-dependencies. Compatible with server-side environments like node.js, module
-loaders like RequireJS and all web browsers.
+1KB lightweight, fast & powerful JavaScript templating engine with zero
+dependencies. Compatible with server-side environments like Node.js, module
+loaders like RequireJS, Browserify or webpack and all web browsers.
 
 ## Usage
 

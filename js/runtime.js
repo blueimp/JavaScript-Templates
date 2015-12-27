@@ -9,7 +9,7 @@
  * http://www.opensource.org/licenses/MIT
  */
 
-/*global define */
+/*global define, module */
 
 (function ($) {
     "use strict";
@@ -41,6 +41,8 @@
         define(function () {
             return tmpl;
         });
+    } else if (typeof module === "object" && module.exports) {
+        module.exports = tmpl;
     } else {
         $.tmpl = tmpl;
     }
