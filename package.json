@@ -29,7 +29,7 @@
     "build": "uglifyjs js/tmpl.js -c -m > js/tmpl.min.js",
     "preversion": "npm test",
     "version": "npm run build && git add -A js",
-    "postversion": "git push origin master --tags && npm publish"
+    "postversion": "git push --tags origin master master:gh-pages && npm publish"
   },
   "bin": {
     "tmpl.js": "js/compile.js"
