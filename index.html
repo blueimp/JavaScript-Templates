@@ -72,11 +72,10 @@ Compatible with server-side environments like <a href="http://nodejs.org/">Node.
 }
 </script>
 <script type="text/x-tmpl" id="tmpl-error">
-<code>{%=o%}</code>
+<h3 class="error">{%=o.title%}</h3>
+<code>{%=o.error%}</code>
 </script>
 <script src="js/tmpl.js"></script>
-<!-- jQuery is not required by JavaScript Templates, but included for the demo -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="js/demo.js"></script>
 </body>
 </html>

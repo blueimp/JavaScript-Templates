@@ -48,6 +48,9 @@ input {
   background: #fff;
   color: #222;
 }
+.error {
+  color: red;
+}
 
 @media (min-width: 481px) {
   .navigation {
