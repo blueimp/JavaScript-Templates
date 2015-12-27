@@ -26,7 +26,7 @@
   },
   "scripts": {
     "test": "jshint js test && mocha",
-    "build": "uglifyjs js/tmpl.js -c -m > js/tmpl.min.js",
+    "build": "cd js && uglifyjs tmpl.js -c -m -o tmpl.min.js --source-map tmpl.min.js.map",
     "preversion": "npm test",
     "version": "npm run build && git add -A js",
     "postversion": "git push --tags origin master master:gh-pages && npm publish"
