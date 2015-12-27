@@ -97,9 +97,9 @@ Add a file **server.js** with the following content:
 require("http").createServer(function (req, res) {
     var fs = require("fs"),
         // The tmpl module exports the tmpl() function:
-        tmpl = require("./tmpl").tmpl,
+        tmpl = require("./tmpl"),
         // Use the following version if you installed the package with npm:
-        // tmpl = require("blueimp-tmpl").tmpl,
+        // tmpl = require("blueimp-tmpl"),
         // Sample data:
         data = {
             "title": "JavaScript Templates",
