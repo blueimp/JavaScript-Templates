@@ -20,12 +20,12 @@
   "license": "MIT",
   "devDependencies": {
     "expect.js": "0.3.1",
-    "jshint": "2.8.0",
     "mocha": "2.3.4",
+    "standard": "6.0.7",
     "uglify-js": "2.6.1"
   },
   "scripts": {
-    "test": "jshint js test && mocha",
+    "test": "standard js/*.js test/*.js && mocha",
     "build": "cd js && uglifyjs tmpl.js -c -m -o tmpl.min.js --source-map tmpl.min.js.map",
     "preversion": "npm test",
     "version": "npm run build && git add -A js",
@@ -34,23 +34,5 @@
   "bin": {
     "tmpl.js": "js/compile.js"
   },
-  "main": "js/tmpl.js",
-  "jshintConfig": {
-    "bitwise": true,
-    "curly": true,
-    "eqeqeq": true,
-    "forin": true,
-    "freeze": true,
-    "immed": true,
-    "latedef": true,
-    "newcap": true,
-    "noarg": true,
-    "noempty": true,
-    "nonbsp": true,
-    "nonew": true,
-    "quotmark": true,
-    "undef": true,
-    "unused": true,
-    "strict": true
-  }
+  "main": "js/tmpl.js"
 }
