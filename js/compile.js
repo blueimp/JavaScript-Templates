@@ -48,7 +48,7 @@
     var content
     var result
     var id
-    // Skipt the first two arguments, which are "node" and the script:
+    // Skip the first two arguments, which are "node" and the script:
     if (index > 1) {
       stats = fs.statSync(file)
       if (!stats.isFile()) {
