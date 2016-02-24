@@ -19,10 +19,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "expect.js": "0.3.1",
-    "mocha": "2.3.4",
-    "standard": "6.0.7",
-    "uglify-js": "2.6.1"
+    "expect.js": "~0.3.1",
+    "mocha": "~2.3.4",
+    "standard": "~6.0.7",
+    "uglify-js": "~2.6.1"
   },
   "scripts": {
     "test": "standard js/*.js test/*.js && mocha",
