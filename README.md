@@ -1,7 +1,7 @@
 # JavaScript Templates
 
 ## Demo
-[JavaScript Templates Demo](https://blueimp.github.io/JavaScript-Templates/)
+[JavaScript Templates Demo](https://blueimp.github.io/JavaScript-Templates/) [![Build Status](https://travis-ci.org/PALADINS-AC/JavaScript-Templates.svg?branch=master)](https://travis-ci.org/PALADINS-AC/JavaScript-Templates)
 
 ## Description
 1KB lightweight, fast & powerful JavaScript templating engine with zero
