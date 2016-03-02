@@ -367,12 +367,10 @@ This will put the executable **tmpl.js** into the folder
 install the packages globally (by adding the **-g** flag to the install command).
 
 The **tmpl.js** executable accepts the paths to one or multiple template files
-as command line arguments and prints the generated JavaScript code to the
-console output. The following command line shows you how to store the generated
-code in a new JavaScript file that can be included in your project:
+as command line arguments and saves the generated JavaScript code to a file named **compiled_template.js** in the current directory:
 
 ```sh
-tmpl.js templates/upload.html templates/download.html > tmpl.min.js
+tmpl.js templates/upload.html templates/download.html
 ```
 
 The files given as command line arguments to **tmpl.js** can either be pure
