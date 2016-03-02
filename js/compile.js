@@ -17,7 +17,6 @@
   var path = require('path')
   var tmpl = require(path.join(__dirname, 'tmpl.js'))
   var fs = require('fs')
-  var uglifyJS = require('uglify-js')
   // Retrieve the content of the minimal runtime:
   var runtime = fs.readFileSync(path.join(__dirname, 'runtime.js'), 'utf8')
   // A regular expression to parse templates from script tags in a HTML page:
