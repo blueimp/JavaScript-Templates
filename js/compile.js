@@ -78,6 +78,12 @@
   }
   // Combine the generated functions as cache of the minimal runtime:
   code = runtime.replace('{}', '{' + list.join(',') + '}')
-  // Generate the minified code and print it to the console output:
-  console.log(uglifyJS.minify(code, {fromString: true}).code)
+  // Write the cmpiled code to an arbitrary outfile:
+    fs.writeFile(path.join(__dirname, 'compiled_template.js'), code, function(err) {
+    if(err) {
+	return console.log(err);
+    }
+
+    console.log("The file was saved successfully.");
+  }); 
 }())
