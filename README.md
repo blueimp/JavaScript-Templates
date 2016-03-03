@@ -367,7 +367,7 @@ This will put the executable **tmpl.js** into the folder
 install the packages globally (by adding the **-g** flag to the install command).
 
 The **tmpl.js** executable accepts the paths to one or multiple template files
-as command line arguments and saves the generated JavaScript code to a file named **compiled_template.js** in the current working directory:
+as command line arguments and saves the generated JavaScript code to **output.js** in the current working directory:
 
 ```sh
 tmpl.js templates/upload.html templates/download.html
