@@ -78,7 +78,7 @@
   // Combine the generated functions as cache of the minimal runtime:
   code = runtime.replace('{}', '{' + list.join(',') + '}')
   // Write the compiled code to an arbitrary outfile:
-    fs.writeFile(path.join(__dirname, 'compiled_template.js'), code, function(err) {
+    fs.writeFile(path.join(process.cwd(), 'output.js'), code, function(err) {
     if(err) {
 	return console.log(err);
     }
