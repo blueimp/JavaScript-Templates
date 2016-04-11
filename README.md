@@ -352,20 +352,18 @@ Use **include(str, obj)** to include content from a different template:
 ## Compiled templates
 The JavaScript Templates project comes with a compilation script, that allows
 you to compile your templates into JavaScript code and combine them with a
-minimal Templates runtime into one minified JavaScript file.
+minimal Templates runtime into one combined JavaScript file.
 
-The compilation script is built for [node.js](http://nodejs.org/) and also
-requires [UglifyJS](https://github.com/mishoo/UglifyJS).  
-To use it, first install both the JavaScript Templates project and UglifyJS via
+The compilation script is built for [node.js](http://nodejs.org/).  
+To use it, first install the JavaScript Templates project via
 [npm](https://www.npmjs.org/):
 
 ```sh
-npm install uglify-js blueimp-tmpl
+npm install blueimp-tmpl
 ```
 
-This will put the executables **uglifyjs** and **tmpl.js** into the folder
-**node_modules/.bin**. It will also make them available on your PATH if you
-install the packages globally
+This will put the executable **tmpl.js** into the folder **node_modules/.bin**.
+It will also make it available on your PATH if you install the package globally
 (by adding the **-g** flag to the install command).
 
 The **tmpl.js** executable accepts the paths to one or multiple template files
@@ -374,7 +372,7 @@ console output. The following command line shows you how to store the generated
 code in a new JavaScript file that can be included in your project:
 
 ```sh
-tmpl.js templates/upload.html templates/download.html > tmpl.min.js
+tmpl.js index.html > tmpl.js
 ```
 
 The files given as command line arguments to **tmpl.js** can either be pure

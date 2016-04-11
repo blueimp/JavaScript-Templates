@@ -17,7 +17,6 @@
   var path = require('path')
   var tmpl = require(path.join(__dirname, 'tmpl.js'))
   var fs = require('fs')
-  var uglifyJS = require('uglify-js')
   // Retrieve the content of the minimal runtime:
   var runtime = fs.readFileSync(path.join(__dirname, 'runtime.js'), 'utf8')
   // A regular expression to parse templates from script tags in a HTML page:
@@ -78,6 +77,6 @@
   }
   // Combine the generated functions as cache of the minimal runtime:
   code = runtime.replace('{}', '{' + list.join(',') + '}')
-  // Generate the minified code and print it to the console output:
-  console.log(uglifyJS.minify(code, {fromString: true}).code)
+  // Print the resulting code to the console output:
+  console.log(code)
 }())
