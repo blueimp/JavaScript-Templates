@@ -83,4 +83,4 @@
   } else {
     $.tmpl = tmpl
   }
-}(this))
+}(window))
