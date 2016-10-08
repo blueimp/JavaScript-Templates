@@ -12,7 +12,7 @@
  * http://ejohn.org/blog/javascript-micro-templating/
  */
 
-/*global document, define, module */
+/* global define */
 
 ;(function ($) {
   'use strict'
@@ -55,7 +55,7 @@
       return "_s+='"
     }
   }
-  tmpl.encReg = /[<>&"'\x00]/g
+  tmpl.encReg = /[<>&"'\x00]/g // eslint-disable-line no-control-regex
   tmpl.encMap = {
     '<': '&lt;',
     '>': '&gt;',

@@ -9,7 +9,7 @@
  * http://www.opensource.org/licenses/MIT
  */
 
-/*global define, module */
+/* global define */
 
 ;(function ($) {
   'use strict'
@@ -20,7 +20,7 @@
     }
   }
   tmpl.cache = {}
-  tmpl.encReg = /[<>&"'\x00]/g
+  tmpl.encReg = /[<>&"'\x00]/g // eslint-disable-line no-control-regex
   tmpl.encMap = {
     '<': '&lt;',
     '>': '&gt;',

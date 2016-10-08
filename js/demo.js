@@ -9,7 +9,7 @@
  * http://www.opensource.org/licenses/MIT
  */
 
-/* global document, tmpl */
+/* global tmpl */
 
 ;(function () {
   'use strict'

@@ -9,7 +9,7 @@
  * http://www.opensource.org/licenses/MIT
  */
 
-/*global beforeEach, afterEach, describe, it, require */
+/* global beforeEach, afterEach, describe, it */
 
 ;(function (context, expect, tmpl) {
   'use strict'
@@ -53,7 +53,7 @@
     it('String template', function () {
       expect(
         tmpl('{%=o.value%}', data)
-      ).to.be(
+      ).to.equal(
         'value'
       )
     })
@@ -61,7 +61,7 @@
     it('Load template by id', function () {
       expect(
         tmpl('template', data)
-      ).to.be(
+      ).to.equal(
         'value'
       )
     })
@@ -69,7 +69,7 @@
     it('Retun function when called without data parameter', function () {
       expect(
         tmpl('{%=o.value%}')(data)
-      ).to.be(
+      ).to.equal(
         'value'
       )
     })
@@ -86,7 +86,7 @@
     it('Escape HTML special characters with {%=o.prop%}', function () {
       expect(
         tmpl('{%=o.special%}', data)
-      ).to.be(
+      ).to.equal(
         '&lt;&gt;&amp;&quot;&#39;'
       )
     })
@@ -94,7 +94,7 @@
     it('Allow HTML special characters with {%#o.prop%}', function () {
       expect(
         tmpl('{%#o.special%}', data)
-      ).to.be(
+      ).to.equal(
         '<>&"\'\x00'
       )
     })
@@ -102,7 +102,7 @@
     it('Function call', function () {
       expect(
         tmpl('{%=o.func()%}', data)
-      ).to.be(
+      ).to.equal(
         'value'
       )
     })
@@ -110,7 +110,7 @@
     it('Dot notation', function () {
       expect(
         tmpl('{%=o.deep.value%}', data)
-      ).to.be(
+      ).to.equal(
         'value'
       )
     })
@@ -118,7 +118,7 @@
     it('Handle single quotes', function () {
       expect(
         tmpl('\'single quotes\'{%=": \'"%}', data)
-      ).to.be(
+      ).to.equal(
         "'single quotes': &#39;"
       )
     })
@@ -126,7 +126,7 @@
     it('Handle double quotes', function () {
       expect(
         tmpl('"double quotes"{%=": \\""%}', data)
-      ).to.be(
+      ).to.equal(
         '"double quotes": &quot;'
       )
     })
@@ -134,7 +134,7 @@
     it('Handle backslashes', function () {
       expect(
         tmpl('\\backslashes\\{%=": \\\\"%}', data)
-      ).to.be(
+      ).to.equal(
         '\\backslashes\\: \\'
       )
     })
@@ -148,7 +148,7 @@
           '{%=o.zeroValue%}',
           data
         )
-      ).to.be(
+      ).to.equal(
         'false0'
       )
     })
@@ -162,7 +162,7 @@
           '{%#o.zeroValue%}',
           data
         )
-      ).to.be(
+      ).to.equal(
         'false0'
       )
     })
@@ -173,7 +173,7 @@
           '\n\r\t{%=o.value%}  \n\r\t{%=o.value%}  ',
           data
         )
-      ).to.be(
+      ).to.equal(
         '\n\r\tvalue  \n\r\tvalue  '
       )
     })
@@ -183,7 +183,7 @@
     it('Escape HTML special characters with print(data)', function () {
       expect(
         tmpl('{% print(o.special); %}', data)
-      ).to.be(
+      ).to.equal(
         '&lt;&gt;&amp;&quot;&#39;'
       )
     })
@@ -191,7 +191,7 @@
     it('Allow HTML special characters with print(data, true)', function () {
       expect(
         tmpl('{% print(o.special, true); %}', data)
-      ).to.be(
+      ).to.equal(
         '<>&"\'\x00'
       )
     })
@@ -205,7 +205,7 @@
           '{% print(o.zeroValue); %}',
           data
         )
-      ).to.be(
+      ).to.equal(
         'false0'
       )
     })
@@ -219,7 +219,7 @@
           '{% print(o.zeroValue, true); %}',
           data
         )
-      ).to.be(
+      ).to.equal(
         'false0'
       )
     })
@@ -227,7 +227,7 @@
     it('Include template', function () {
       expect(
         tmpl('{% include("template", {value: "value"}); %}', data)
-      ).to.be(
+      ).to.equal(
         'value'
       )
     })
@@ -235,7 +235,7 @@
     it('If condition', function () {
       expect(
         tmpl('{% if (o.value) { %}true{% } else { %}false{% } %}', data)
-      ).to.be(
+      ).to.equal(
         'true'
       )
     })
@@ -246,7 +246,7 @@
           '{% if (o.undefinedValue) { %}false{% } else { %}true{% } %}',
           data
         )
-      ).to.be(
+      ).to.equal(
         'true'
       )
     })
@@ -258,7 +258,7 @@
           '{%=o.list[i]%}{% } %}',
           data
         )
-      ).to.be(
+      ).to.equal(
         '12345'
       )
     })
@@ -270,7 +270,7 @@
           'print(o.list[i]);} %}',
           data
         )
-      ).to.be(
+      ).to.equal(
         '12345'
       )
     })
@@ -282,7 +282,7 @@
           'include("template", {value: o.list[i]});} %}',
           data
         ).replace(/[\r\n]/g, '')
-      ).to.be(
+      ).to.equal(
         '12345'
       )
     })
@@ -293,13 +293,13 @@
           '{% if (o.list.length % 5 === 0) { %}5 list items{% } %}',
           data
         ).replace(/[\r\n]/g, '')
-      ).to.be(
+      ).to.equal(
         '5 list items'
       )
     })
   })
 }(
   this,
-  this.expect || require('expect.js'),
+  (this.chai || require('chai')).expect,
   this.tmpl || require('../js/tmpl')
 ))

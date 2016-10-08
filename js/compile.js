@@ -10,8 +10,6 @@
  * http://www.opensource.org/licenses/MIT
  */
 
-/*global require, __dirname, process, console */
-
 ;(function () {
   'use strict'
   var path = require('path')
