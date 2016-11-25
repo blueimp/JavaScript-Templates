@@ -1,4 +1,3 @@
 *
-!js/compile.js
-!js/runtime.js
-!js/tmpl.js
+!js/*.js
+!js/*.js.map
