@@ -45,7 +45,7 @@ var data = {
     "title": "JavaScript Templates",
     "license": {
         "name": "MIT license",
-        "url": "http://www.opensource.org/licenses/MIT"
+        "url": "https://opensource.org/licenses/MIT"
     },
     "features": [
         "lightweight & fast",
@@ -397,4 +397,4 @@ the second one the [node.js](http://nodejs.org/) integration.
 
 ## License
 The JavaScript Templates script is released under the
-[MIT license](http://www.opensource.org/licenses/MIT).
+[MIT license](https://opensource.org/licenses/MIT).
