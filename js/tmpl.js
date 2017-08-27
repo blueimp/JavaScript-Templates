@@ -17,7 +17,7 @@
 ;(function ($) {
   'use strict'
   var tmpl = function (str, data) {
-    var f = !/[^\w\-\.:]/.test(str)
+    var f = !/[^\w\-.:]/.test(str)
       ? tmpl.cache[str] = tmpl.cache[str] || tmpl(tmpl.load(str))
       : new Function(// eslint-disable-line no-new-func
         tmpl.arg + ',tmpl',
