@@ -21,7 +21,8 @@
   var regexp = /<script( id="([\w-]+)")? type="text\/x-tmpl"( id="([\w-]+)")?>([\s\S]+?)<\/script>/gi
   // A regular expression to match the helper function names:
   var helperRegexp = new RegExp(
-    tmpl.helper.match(/\w+(?=\s*=\s*function\s*\()/g).join('\\s*\\(|') + '\\s*\\('
+    tmpl.helper.match(/\w+(?=\s*=\s*function\s*\()/g).join('\\s*\\(|') +
+      '\\s*\\('
   )
   // A list to store the function bodies:
   var list = []
@@ -31,12 +32,18 @@
     // Only add helper functions if they are used inside of the template:
     var helper = helperRegexp.test(str) ? tmpl.helper : ''
     var body = str.replace(tmpl.regexp, tmpl.func)
-    if (helper || (/_e\s*\(/.test(body))) {
+    if (helper || /_e\s*\(/.test(body)) {
       helper = '_e=tmpl.encode' + helper + ','
     }
-    return 'function(' + tmpl.arg + ',tmpl){' +
-    ('var ' + helper + "_s='" + body + "';return _s;")
-      .split("_s+='';").join('') + '}'
+    return (
+      'function(' +
+      tmpl.arg +
+      ',tmpl){' +
+      ('var ' + helper + "_s='" + body + "';return _s;")
+        .split("_s+='';")
+        .join('') +
+      '}'
+    )
   }
   // Loop through the command line arguments:
   process.argv.forEach(function (file, index) {
@@ -77,4 +84,4 @@
   code = runtime.replace('{}', '{' + list.join(',') + '}')
   // Print the resulting code to the console output:
   console.log(code)
-}())
+})()
