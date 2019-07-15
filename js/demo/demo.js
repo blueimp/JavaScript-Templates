@@ -11,7 +11,9 @@
 
 /* global tmpl */
 
-;(function () {
+/* eslint-disable strict */
+
+;(function() {
   'use strict'
 
   var templateInput = document.getElementById('template')
@@ -20,14 +22,22 @@
   var templateDemoNode = document.getElementById('tmpl-demo')
   var templateDataNode = document.getElementById('tmpl-data')
 
-  function renderError (title, error) {
-    resultNode.innerHTML = tmpl(
-      'tmpl-error',
-      {title: title, error: error}
-    )
+  /**
+   * Renders error messages
+   *
+   * @param {string} title Error title
+   * @param {Error} error Error object
+   */
+  function renderError(title, error) {
+    resultNode.innerHTML = tmpl('tmpl-error', { title: title, error: error })
   }
 
-  function render (event) {
+  /**
+   * Renders the templating result
+   *
+   * @param {event} event Click event
+   */
+  function render(event) {
     event.preventDefault()
     var data
     try {
@@ -37,27 +47,38 @@
       return
     }
     try {
-      resultNode.innerHTML = tmpl(
-        templateInput.value,
-        data
-      )
+      resultNode.innerHTML = tmpl(templateInput.value, data)
     } catch (e) {
       renderError('Template rendering failed', e)
     }
   }
 
-  function empty (node) {
+  /**
+   * Removes all child elements from a Node
+   *
+   * @param {HTMLElement} node HTML element node
+   */
+  function empty(node) {
     while (node.lastChild) {
       node.removeChild(node.lastChild)
     }
   }
 
-  function init (event) {
+  /**
+   * Initialization function
+   *
+   * @param {event} [event] Initialixation event
+   */
+  function init(event) {
     if (event) {
       event.preventDefault()
     }
-    templateInput.value = templateDemoNode.innerHTML.trim()
-    dataInput.value = templateDataNode.innerHTML.trim()
+    templateInput.value = templateDemoNode.innerHTML
+    dataInput.value = JSON.stringify(
+      JSON.parse(templateDataNode.innerHTML),
+      null,
+      2
+    )
     empty(resultNode)
   }
 
@@ -65,4 +86,4 @@
   document.getElementById('reset').addEventListener('click', init)
 
   init()
-}())
+})()
