@@ -13,7 +13,7 @@
 
 /* eslint-disable strict */
 
-;(function() {
+;(function () {
   'use strict'
 
   var templateInput = document.getElementById('template')

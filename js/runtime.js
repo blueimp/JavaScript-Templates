@@ -13,13 +13,13 @@
 
 /* eslint-disable strict */
 
-;(function($) {
+;(function ($) {
   'use strict'
-  var tmpl = function(id, data) {
+  var tmpl = function (id, data) {
     var f = tmpl.cache[id]
     return data
       ? f(data, tmpl)
-      : function(data) {
+      : function (data) {
           return f(data, tmpl)
         }
   }
@@ -32,14 +32,14 @@
     '"': '&quot;',
     "'": '&#39;'
   }
-  tmpl.encode = function(s) {
+  tmpl.encode = function (s) {
     // eslint-disable-next-line eqeqeq
-    return (s == null ? '' : '' + s).replace(tmpl.encReg, function(c) {
+    return (s == null ? '' : '' + s).replace(tmpl.encReg, function (c) {
       return tmpl.encMap[c] || ''
     })
   }
   if (typeof define === 'function' && define.amd) {
-    define(function() {
+    define(function () {
       return tmpl
     })
   } else if (typeof module === 'object' && module.exports) {

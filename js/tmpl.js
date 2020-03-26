@@ -16,9 +16,9 @@
 
 /* eslint-disable strict */
 
-;(function($) {
+;(function ($) {
   'use strict'
-  var tmpl = function(str, data) {
+  var tmpl = function (str, data) {
     var f = !/[^\w\-.:]/.test(str)
       ? (tmpl.cache[str] = tmpl.cache[str] || tmpl(tmpl.load(str)))
       : new Function( // eslint-disable-line no-new-func
@@ -31,16 +31,16 @@
         )
     return data
       ? f(data, tmpl)
-      : function(data) {
+      : function (data) {
           return f(data, tmpl)
         }
   }
   tmpl.cache = {}
-  tmpl.load = function(id) {
+  tmpl.load = function (id) {
     return document.getElementById(id).innerHTML
   }
   tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g
-  tmpl.func = function(s, p1, p2, p3, p4, p5) {
+  tmpl.func = function (s, p1, p2, p3, p4, p5) {
     if (p1) {
       // whitespace, quote and backspace in HTML context
       return (
@@ -76,9 +76,9 @@
     '"': '&quot;',
     "'": '&#39;'
   }
-  tmpl.encode = function(s) {
+  tmpl.encode = function (s) {
     // eslint-disable-next-line eqeqeq
-    return (s == null ? '' : '' + s).replace(tmpl.encReg, function(c) {
+    return (s == null ? '' : '' + s).replace(tmpl.encReg, function (c) {
       return tmpl.encMap[c] || ''
     })
   }
@@ -87,7 +87,7 @@
     ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);}" +
     ',include=function(s,d){_s+=tmpl(s,d);}'
   if (typeof define === 'function' && define.amd) {
-    define(function() {
+    define(function () {
       return tmpl
     })
   } else if (typeof module === 'object' && module.exports) {
