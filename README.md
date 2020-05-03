@@ -2,7 +2,7 @@
 
 ## Contents
 
-- [Demo](#demo)
+- [Demo](https://blueimp.github.io/JavaScript-Templates/)
 - [Description](#description)
 - [Usage](#usage)
   - [Client-side](#client-side)
@@ -22,19 +22,23 @@
 - [Tests](#tests)
 - [License](#license)
 
-## Demo
-
-[JavaScript Templates Demo](https://blueimp.github.io/JavaScript-Templates/)
-
 ## Description
 
 1KB lightweight, fast & powerful JavaScript templating engine with zero
-dependencies. Compatible with server-side environments like Node.js, module
-loaders like RequireJS, Browserify or webpack and all web browsers.
+dependencies.  
+Compatible with server-side environments like [Node.js](https://nodejs.org/),
+module loaders like [RequireJS](https://requirejs.org/) or
+[webpack](https://webpack.js.org/) and all web browsers.
 
 ## Usage
 
 ### Client-side
+
+Install the **blueimp-tmpl** package with [NPM](https://www.npmjs.org/):
+
+```sh
+npm install blueimp-tmpl
+```
 
 Include the (minified) JavaScript Templates script in your HTML markup:
 
@@ -77,7 +81,7 @@ var data = {
 ```
 
 In a real application, this data could be the result of retrieving a
-[JSON](http://json.org/) resource.
+[JSON](https://json.org/) resource.
 
 Render the result by calling the **tmpl()** method with the id of the template
 and the data object as arguments:
@@ -89,10 +93,9 @@ document.getElementById('result').innerHTML = tmpl('tmpl-demo', data)
 ### Server-side
 
 The following is an example how to use the JavaScript Templates engine on the
-server-side with [node.js](http://nodejs.org/).
+server-side with [Node.js](https://nodejs.org/).
 
-Create a new directory and add the **tmpl.js** file. Or alternatively, install
-the **blueimp-tmpl** package with [npm](https://www.npmjs.org/):
+Install the **blueimp-tmpl** package with [NPM](https://www.npmjs.org/):
 
 ```sh
 npm install blueimp-tmpl
@@ -116,7 +119,7 @@ Add a file **server.js** with the following content:
 
 ```js
 require('http')
-  .createServer(function(req, res) {
+  .createServer(function (req, res) {
     var fs = require('fs'),
       // The tmpl module exports the tmpl() function:
       tmpl = require('./tmpl'),
@@ -129,7 +132,7 @@ require('http')
         features: ['lightweight & fast', 'powerful', 'zero dependencies']
       }
     // Override the template loading method:
-    tmpl.load = function(id) {
+    tmpl.load = function (id) {
       var filename = id + '.html'
       console.log('Loading ' + filename)
       return fs.readFileSync(filename, 'utf8')
@@ -295,7 +298,7 @@ function, e.g. with the following code:
 
 ```js
 var originalFunc = tmpl.func
-tmpl.func = function(s, p1, p2, p3, p4, p5, offset, str) {
+tmpl.func = function (s, p1, p2, p3, p4, p5, offset, str) {
   if (p1 && /\s/.test(p1)) {
     if (
       !offset ||
@@ -386,9 +389,9 @@ The JavaScript Templates project comes with a compilation script, that allows
 you to compile your templates into JavaScript code and combine them with a
 minimal Templates runtime into one combined JavaScript file.
 
-The compilation script is built for [node.js](http://nodejs.org/).  
+The compilation script is built for [Node.js](https://nodejs.org/).  
 To use it, first install the JavaScript Templates project via
-[npm](https://www.npmjs.org/):
+[NPM](https://www.npmjs.org/):
 
 ```sh
 npm install blueimp-tmpl
@@ -425,7 +428,7 @@ There are two different ways to run the tests:
 - run `npm test` in the Terminal in the root path of the repository package.
 
 The first one tests the browser integration, the second one the
-[node.js](http://nodejs.org/) integration.
+[Node.js](https://nodejs.org/) integration.
 
 ## License
 
