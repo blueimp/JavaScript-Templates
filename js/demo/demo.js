@@ -73,7 +73,11 @@
     if (event) {
       event.preventDefault()
     }
-    templateInput.value = templateDemoNode.innerHTML
+    templateInput.value = templateDemoNode.innerHTML.replace(
+      // Replace unnecessary whitespace:
+      /^\n|\s+$| {6}/g,
+      ''
+    )
     dataInput.value = JSON.stringify(
       JSON.parse(templateDataNode.innerHTML),
       null,
