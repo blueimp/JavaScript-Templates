@@ -57,17 +57,20 @@
       <li><a href="https://blueimp.net">&copy; Sebastian Tschan</a></li>
     </ul>
     <form>
-      <h2>Template</h2>
-      <textarea rows="12" id="template"></textarea>
-      <br />
-      <h2>Data (JSON)</h2>
-      <textarea rows="14" id="data"></textarea>
-      <br />
-      <button type="submit" id="render">Render</button>
-      <button type="reset" id="reset">Reset</button>
+      <p>
+        <label for="template">Template</label>
+        <textarea rows="12" id="template" class="code"></textarea>
+      </p>
+      <p>
+        <label for="data">Data (JSON)</label>
+        <textarea rows="14" id="data" class="code"></textarea>
+      </p>
+      <p>
+        <button type="submit" id="render">Render</button>
+        <button type="reset" id="reset">Reset</button>
+      </p>
       <h2>Result</h2>
       <div id="result" class="result"></div>
-      <br />
     </form>
     <script type="text/x-tmpl" id="tmpl-demo">
       <h3>{%=o.title%}</h3>
@@ -95,8 +98,8 @@
       }
     </script>
     <script type="text/x-tmpl" id="tmpl-error">
-      <h3 class="error">{%=o.title%}</h3>
-      <code>{%=o.error%}</code>
+      <h5>{%=o.title%}</h5>
+      <pre>{%=o.error.toString()%}</pre>
     </script>
     <script src="js/tmpl.js"></script>
     <script src="js/demo/demo.js"></script>
