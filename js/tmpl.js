@@ -39,7 +39,8 @@
   tmpl.load = function (id) {
     return document.getElementById(id).innerHTML
   }
-  tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g
+  tmpl.regexp =
+    /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g
   tmpl.func = function (s, p1, p2, p3, p4, p5) {
     if (p1) {
       // whitespace, quote and backspace in HTML context
