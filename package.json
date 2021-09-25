@@ -55,6 +55,7 @@
     "lint": "eslint .",
     "unit": "mocha",
     "test": "npm run lint && npm run unit",
+    "prebuild": "bin/sync-vendor-libs.sh",
     "build": "cd js && uglifyjs tmpl.js -c -m -o tmpl.min.js --source-map url=tmpl.min.js.map",
     "preversion": "npm test",
     "version": "npm run build && git add -A js",
